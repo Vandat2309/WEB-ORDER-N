@@ -245,6 +245,58 @@ input:focus, textarea:focus, select:focus {
     font-weight: bold;
 }
 
+.user-header {
+    margin-right: 1rem;
+}
+
+.account-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.account-btn .account-icon {
+    font-size: 1.2rem;
+}
+
+.auth-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.social-login {
+    display: flex;
+    gap: var(--spacing-sm);
+    flex-direction: column;
+}
+
+.social-login .btn {
+    width: 100%;
+}
+
+.divider {
+    text-align: center;
+    color: #888;
+    margin: 0.5rem 0;
+}
+
+.auth-switch {
+    text-align: center;
+    color: #666;
+}
+
+.auth-switch a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 700;
+}
+
 
 
 .main-content {
@@ -1308,4 +1360,33 @@ input:focus, textarea:focus, select:focus {
     .modal-footer .btn {
         width: 100%;
     }
+}
+
+/* style.css bổ sung */
+.social-login {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#googleLogin {
+    background-color: #df4930; /* Màu đỏ Google */
+    color: white;
+    border: none;
+}
+
+#facebookLogin {
+    background-color: #3b5998; /* Màu xanh Facebook */
+    color: white;
+    border: none;
+}
+
+.auth-switch {
+    margin-top: 15px;
+    font-size: 0.9rem;
+}
+
+.auth-form .btn {
+    width: 100%;
+    margin-top: 10px;
 }

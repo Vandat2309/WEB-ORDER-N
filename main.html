@@ -21,6 +21,12 @@
                     <li><a href="#contact" class="nav-link" data-section="contact">Liên Hệ</a></li>
                 </ul>
             </nav>
+            <div class="user-header">
+                <button class="account-btn" id="accountBtn">
+                    <span class="account-icon">👤</span>
+                    <span class="account-name" id="accountName">Đăng nhập</span>
+                </button>
+            </div>
             <div class="cart-header">
                 <button class="cart-icon-btn" id="cartBtn">
                     <span class="cart-icon">🛒</span>
@@ -29,6 +35,59 @@
             </div>
         </div>
     </header>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="authTitle">Đăng Nhập</h3>
+                <button class="modal-close" data-modal="authModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="auth-container">
+                    <div class="social-login">
+                        <button class="btn btn-primary" id="googleLogin">Đăng nhập với Google</button>
+                        <button class="btn btn-primary" id="facebookLogin">Đăng nhập với Facebook</button>
+                    </div>
+
+                    <div class="divider">Hoặc</div>
+
+                    <form id="loginForm" class="auth-form">
+                        <div class="form-group">
+                            <label for="loginEmail">Email</label>
+                            <input type="email" id="loginEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPassword">Mật khẩu</label>
+                            <input type="password" id="loginPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Đăng Nhập</button>
+                    </form>
+
+                    <form id="registerForm" class="auth-form" style="display:none;">
+                        <div class="form-group">
+                            <label for="regName">Họ Tên</label>
+                            <input type="text" id="regName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="regEmail">Email</label>
+                            <input type="email" id="regEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="regPassword">Mật khẩu</label>
+                            <input type="password" id="regPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Đăng Ký</button>
+                    </form>
+
+                    <div class="auth-switch">
+                        <span id="toRegister">Chưa có tài khoản? <a href="#">Đăng ký</a></span>
+                        <span id="toLogin" style="display:none;">Đã có tài khoản? <a href="#">Đăng nhập</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <main class="main-content">
         <section id="home" class="section active">

@@ -1,5 +1,5 @@
 
-// Dữ liệu mã giảm giá
+
 const PROMO_CODES = {
     'SUMMER50': { type: 'fixed', value: 50000, description: 'Giảm 50k' },
     'NEWYEAR20': { type: 'percent', value: 20, description: 'Giảm 20%' },
@@ -174,6 +174,107 @@ const MENU_DATA = [
         emoji: '🍪',
         rating: 4.8,
         ratingCount: 120
+    },
+
+    {
+        id: 17,
+        name: 'Phở Bò',
+        category: 'vietnamese',
+        price: 35000,
+        description: 'Phở bò truyền thống với nước dùng vị thơm, thịt bò mềm',
+        emoji: '🍜',
+        rating: 4.9,
+        ratingCount: 450
+    },
+    {
+        id: 18,
+        name: 'Bún Chả',
+        category: 'vietnamese',
+        price: 38000,
+        description: 'Bún chả Hà Nội với thịt nướng, chả cốm, rau sạch',
+        emoji: '🍲',
+        rating: 4.8,
+        ratingCount: 380
+    },
+    {
+        id: 19,
+        name: 'Mỳ Quảng',
+        category: 'vietnamese',
+        price: 42000,
+        description: 'Mỳ Quảng đặc trưng với tỏi, nước dừa, thịt gà và tôm',
+        emoji: '🍝',
+        rating: 4.7,
+        ratingCount: 320
+    },
+    {
+        id: 20,
+        name: 'Gà Rán Giòn',
+        category: 'vietnamese',
+        price: 48000,
+        description: 'Gà rán giòn với công thức truyền thống, ăn kèm nước mắm chua',
+        emoji: '🍗',
+        rating: 4.8,
+        ratingCount: 410
+    },
+    {
+        id: 21,
+        name: 'Cơm Tấm',
+        category: 'vietnamese',
+        price: 36000,
+        description: 'Cơm tấm Sài Gòn với sườn nướng, chả trứng, trứng ốp la',
+        emoji: '🍚',
+        rating: 4.7,
+        ratingCount: 340
+    },
+    {
+        id: 22,
+        name: 'Bánh Mì Thịt Nướng',
+        category: 'vietnamese',
+        price: 32000,
+        description: 'Bánh mì giòn với thịt nướng, pâté, rau sạch tươi ngon',
+        emoji: '🥖',
+        rating: 4.6,
+        ratingCount: 360
+    },
+    {
+        id: 23,
+        name: 'Hủ Tiếu',
+        category: 'vietnamese',
+        price: 34000,
+        description: 'Hủ tiếu Nam Vang với tôm, cua, giò heo và rau',
+        emoji: '🍤',
+        rating: 4.7,
+        ratingCount: 300
+    },
+    {
+        id: 24,
+        name: 'Bún Riêu Cua',
+        category: 'vietnamese',
+        price: 39000,
+        description: 'Bún riêu cua nóng hổi với tôm, cua, trứng cua',
+        emoji: '🦀',
+        rating: 4.8,
+        ratingCount: 370
+    },
+    {
+        id: 25,
+        name: 'Chả Cá Lã Vọng',
+        category: 'vietnamese',
+        price: 45000,
+        description: 'Chả cá tươi với cà chua, nước dùng thơm, bún tươi',
+        emoji: '🐟',
+        rating: 4.9,
+        ratingCount: 290
+    },
+    {
+        id: 26,
+        name: 'Canh Cà Chua',
+        category: 'vietnamese',
+        price: 28000,
+        description: 'Canh cà chua chua ngọt với cá, tôm, thơm lừng',
+        emoji: '🍅',
+        rating: 4.6,
+        ratingCount: 250
     }
 ];
 
@@ -498,7 +599,8 @@ function getCategoryLabel(category) {
         'burger': 'Burger',
         'pizza': 'Pizza',
         'drink': 'Đồ Uống',
-        'dessert': 'Tráng Miệng'
+        'dessert': 'Tráng Miệng',
+        'vietnamese': 'Món Việt'
     };
     return labels[category] || category;
 }
@@ -899,7 +1001,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Event listener cho search input
+
     document.getElementById('searchInput').addEventListener('input', (e) => {
         appState.searchQuery = e.target.value;
         renderMenu(appState.currentCategory, appState.searchQuery);
@@ -937,7 +1039,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     document.getElementById('checkoutBtn').addEventListener('click', startCheckout);
 
-    // Event listeners cho promo code
+
     document.getElementById('applyPromoBtn').addEventListener('click', () => {
         const code = document.getElementById('promoCode').value.trim();
         if (!code) {
@@ -1016,6 +1118,95 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
+
+    // --- XỬ LÝ ĐĂNG NHẬP & ĐĂNG KÝ ---
+
+    // Mở modal khi bấm vào nút "Đăng nhập" trên Header
+    const accountBtn = document.getElementById('accountBtn');
+    if (accountBtn) {
+        accountBtn.addEventListener('click', () => {
+            openModal('authModal');
+        });
+    }
+
+    // Chuyển đổi giữa form Đăng Nhập và Đăng Ký
+    const toRegister = document.getElementById('toRegister');
+    const toLogin = document.getElementById('toLogin');
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+    const authTitle = document.getElementById('authTitle');
+
+    if (toRegister) {
+        toRegister.addEventListener('click', (e) => {
+            e.preventDefault();
+            authTitle.textContent = 'Đăng Ký';
+            loginForm.style.display = 'none';
+            registerForm.style.display = 'block';
+            toRegister.style.display = 'none';
+            toLogin.style.display = 'block';
+        });
+    }
+
+    if (toLogin) {
+        toLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            authTitle.textContent = 'Đăng Nhập';
+            loginForm.style.display = 'block';
+            registerForm.style.display = 'none';
+            toRegister.style.display = 'block';
+            toLogin.style.display = 'none';
+        });
+    }
+
+    // Hàm xử lý sau khi đăng nhập thành công
+    function handleLoginSuccess(name) {
+        const accountName = document.getElementById('accountName');
+        if (accountName) {
+            accountName.textContent = name;
+        }
+        closeModal('authModal');
+        showNotification(`Chào mừng ${name} đã quay trở lại!`, 'success');
+    }
+
+    // Xử lý submit Form Đăng Nhập
+    if (loginForm) {
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            // Giả lập logic kiểm tra: lấy phần tên trước @ của email làm tên hiển thị
+            const username = email.split('@')[0];
+            handleLoginSuccess(username);
+        });
+    }
+
+    // Xử lý submit Form Đăng Ký
+    if (registerForm) {
+        registerForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('regName').value;
+            showNotification('Đăng ký tài khoản thành công!', 'success');
+            handleLoginSuccess(name);
+        });
+    }
+
+    // Xử lý Đăng nhập qua Google/Facebook (Giả lập)
+    const googleLogin = document.getElementById('googleLogin');
+    const facebookLogin = document.getElementById('facebookLogin');
+
+    if (googleLogin) {
+        googleLogin.addEventListener('click', () => {
+            showNotification('Đang kết nối với Google...', 'info');
+            setTimeout(() => handleLoginSuccess('User Google'), 1000);
+        });
+    }
+
+    if (facebookLogin) {
+        facebookLogin.addEventListener('click', () => {
+            showNotification('Đang kết nối với Facebook...', 'info');
+            setTimeout(() => handleLoginSuccess('User Facebook'), 1000);
+        });
+    }
+
     const style = document.createElement('style');
     style.textContent = `
         .order-detail {
