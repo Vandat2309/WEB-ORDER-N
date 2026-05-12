@@ -15,7 +15,7 @@ const MENU_DATA = [
         price: 39000,
         description: 'Burger cổ điển với thịt bò, phô mai, xà lách và cà chua',
         emoji: '🍔',
-        image: 'image/clasic buger.jpg',
+        image: 'image/classic-burger.jpg',
         rating: 4.5,
         ratingCount: 150
     },
@@ -26,7 +26,7 @@ const MENU_DATA = [
         price: 45000,
         description: 'Burger với 2 lớp phô mai mozzarella và thịt bò tươi',
         emoji: '🧀',
-        image: 'image/Cheese Buger.jpg',
+        image: 'image/cheese-burger.jpg',
         rating: 4.7,
         ratingCount: 200
     },
