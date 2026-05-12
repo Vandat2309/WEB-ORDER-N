@@ -156,6 +156,18 @@ input:focus, textarea:focus, select:focus {
     color: var(--text-color);
 }
 
+.form-group.has-error input,
+.form-group.has-error textarea {
+    border-color: var(--danger-color);
+    box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.15);
+}
+
+.form-group.has-error input:focus,
+.form-group.has-error textarea:focus {
+    border-color: var(--danger-color);
+    box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.22);
+}
+
 .form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;

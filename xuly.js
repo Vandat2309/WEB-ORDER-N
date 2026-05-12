@@ -327,6 +327,59 @@ function assetUrl(path) {
     return t.split('/').map((seg) => encodeURIComponent(seg)).join('/');
 }
 
+function normalizeVNPhone(input) {
+    let d = String(input || '').replace(/\D/g, '');
+    if (d.startsWith('84') && d.length >= 10) d = '0' + d.slice(2);
+    return d;
+}
+
+/** Di động VN: 10 số, đầu 0 và nhóm 3/5/7/8/9; chấp nhận +84... */
+function isValidVNPhone(input) {
+    const d = normalizeVNPhone(input);
+    return /^0[35789]\d{8}$/.test(d);
+}
+
+function isValidEmail(input) {
+    const s = String(input || '').trim();
+    if (!s) return false;
+    return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(s);
+}
+
+function clearCheckoutFieldVisualErrors() {
+    const form = document.getElementById('checkoutForm');
+    if (!form) return;
+    form.querySelectorAll('.form-group.has-error').forEach((g) => g.classList.remove('has-error'));
+    form.querySelectorAll('input, textarea').forEach((el) => el.setCustomValidity(''));
+}
+
+function validateCheckoutForm() {
+    const form = document.getElementById('checkoutForm');
+    if (!form) return false;
+
+    clearCheckoutFieldVisualErrors();
+
+    const phone = document.getElementById('customerPhone');
+    const email = document.getElementById('customerEmail');
+
+    if (!isValidVNPhone(phone.value)) {
+        phone.setCustomValidity('Nhập số điện thoại đúng (10 số: 03/05/07/08/09… hoặc +84).');
+    }
+    if (!isValidEmail(email.value)) {
+        email.setCustomValidity('Nhập email đúng định dạng (vd: ten@gmail.com).');
+    }
+
+    if (!form.checkValidity()) {
+        form.querySelectorAll(':invalid').forEach((el) => {
+            el.closest('.form-group')?.classList.add('has-error');
+        });
+        const firstInvalid = form.querySelector(':invalid');
+        if (firstInvalid) firstInvalid.focus();
+        form.reportValidity();
+        return false;
+    }
+    return true;
+}
+
 /** Hiển thị ảnh món; nếu lỗi tải thì fallback emoji (class --error xử lý trong CSS). */
 function foodThumbMarkup(product, photoClass) {
     const emoji = escapeHtml(product.emoji || '');
@@ -1000,13 +1053,11 @@ function submitOrder() {
     const form = document.getElementById('checkoutForm');
     const submitBtn = document.getElementById('submitOrderBtn');
 
-    // 1. Kiểm tra nếu form hợp lệ
-    if (!form.checkValidity()) {
-        form.reportValidity(); // Hiển thị lỗi cụ thể của trình duyệt cho người dùng thấy
+    if (!validateCheckoutForm()) {
         return;
     }
 
-    // 2. Hiển thị trạng thái đang xử lý
+    // Hiển thị trạng thái đang xử lý
     submitBtn.disabled = true;
     submitBtn.classList.add('loading');
     const originalText = submitBtn.textContent;
@@ -1154,6 +1205,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
     
     document.getElementById('submitOrderBtn').addEventListener('click', submitOrder);
+
+    const checkoutFormEl = document.getElementById('checkoutForm');
+    if (checkoutFormEl) {
+        checkoutFormEl.addEventListener('input', (e) => {
+            const el = e.target;
+            if (!(el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement)) return;
+            el.setCustomValidity('');
+            el.closest('.form-group')?.classList.remove('has-error');
+        });
+    }
 
     
     document.getElementById('cancelOrderBtn').addEventListener('click', () => {
