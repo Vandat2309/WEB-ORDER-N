@@ -1,4 +1,11 @@
 
+// Dữ liệu mã giảm giá
+const PROMO_CODES = {
+    'SUMMER50': { type: 'fixed', value: 50000, description: 'Giảm 50k' },
+    'NEWYEAR20': { type: 'percent', value: 20, description: 'Giảm 20%' },
+    'FREESHIP': { type: 'fixed', value: 30000, description: 'Giảm 30k' },
+    'WELCOME10': { type: 'percent', value: 10, description: 'Giảm 10%' },
+};
 
 const MENU_DATA = [
    
@@ -177,6 +184,9 @@ class AppState {
         this.orders = this.loadOrders();
         this.currentProduct = null;
         this.currentOrder = null;
+        this.currentCategory = 'all';
+        this.searchQuery = '';
+        this.appliedPromo = null;
     }
 
     loadCart() {
@@ -195,6 +205,17 @@ class AppState {
 
     saveOrders() {
         localStorage.setItem('fastfood_orders', JSON.stringify(this.orders));
+    }
+
+    // Lưu thông tin thanh toán
+    saveCheckoutInfo(checkoutInfo) {
+        localStorage.setItem('fastfood_checkout_info', JSON.stringify(checkoutInfo));
+    }
+
+    // Lấy thông tin thanh toán đã lưu
+    loadCheckoutInfo() {
+        const savedInfo = localStorage.getItem('fastfood_checkout_info');
+        return savedInfo ? JSON.parse(savedInfo) : null;
     }
 
     addToCart(product, quantity) {
@@ -233,6 +254,41 @@ class AppState {
 
     getCartCount() {
         return this.cart.reduce((count, item) => count + item.quantity, 0);
+    }
+
+    // Áp dụng mã giảm giá
+    applyPromoCode(code) {
+        const promo = PROMO_CODES[code.toUpperCase()];
+        if (!promo) return null;
+        
+        this.appliedPromo = {
+            code: code.toUpperCase(),
+            ...promo
+        };
+        return this.appliedPromo;
+    }
+
+    // Xóa mã giảm giá
+    removePromoCode() {
+        this.appliedPromo = null;
+    }
+
+    // Tính tiền giảm
+    getDiscount() {
+        if (!this.appliedPromo) return 0;
+        
+        const total = this.getCartTotal();
+        if (this.appliedPromo.type === 'fixed') {
+            return Math.min(this.appliedPromo.value, total);
+        } else if (this.appliedPromo.type === 'percent') {
+            return Math.floor(total * this.appliedPromo.value / 100);
+        }
+        return 0;
+    }
+
+    // Tính tổng tiền sau giảm
+    getFinalTotal() {
+        return Math.max(0, this.getCartTotal() - this.getDiscount());
     }
 
     clearCart() {
@@ -286,14 +342,64 @@ function formatCurrency(amount) {
     }).format(amount);
 }
 
-function showNotification(message, type = 'success') {
-    const notification = document.getElementById('notification');
-    notification.textContent = message;
+function showNotification(message, type = 'success', duration = 3000) {
+    // Tạo notification container nếu chưa tồn tại
+    let notificationContainer = document.getElementById('notificationContainer');
+    if (!notificationContainer) {
+        notificationContainer = document.createElement('div');
+        notificationContainer.id = 'notificationContainer';
+        notificationContainer.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            pointer-events: none;
+        `;
+        document.body.appendChild(notificationContainer);
+    }
+
+    // Tạo notification element
+    const notification = document.createElement('div');
     notification.className = `notification ${type} active`;
+    notification.textContent = message;
+    notification.style.cssText = `
+        background: white;
+        padding: 1rem 1.5rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        animation: slideIn 0.3s ease;
+        max-width: 400px;
+        pointer-events: auto;
+        cursor: pointer;
+    `;
+
+    // Thêm CSS class động
+    notification.className = `notification ${type}`;
     
-    setTimeout(() => {
-        notification.classList.remove('active');
-    }, 3000);
+    // Thêm vào container
+    notificationContainer.appendChild(notification);
+
+    // Auto remove sau duration
+    const timeout = setTimeout(() => {
+        notification.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => notification.remove(), 300);
+    }, duration);
+
+    // Click để đóng
+    notification.addEventListener('click', () => {
+        clearTimeout(timeout);
+        notification.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => notification.remove(), 300);
+    });
+}
+
+function showMessagePromo(message, type = 'success') {
+    const msgElement = document.getElementById('promoMessage');
+    msgElement.textContent = message;
+    msgElement.className = type;
 }
 
 function openModal(modalId) {
@@ -338,13 +444,32 @@ function navigateToSection(sectionId) {
 
 
 
-function renderMenu(category = 'all') {
+function renderMenu(category = 'all', searchQuery = '') {
     const menuContainer = document.getElementById('menuContainer');
     menuContainer.innerHTML = '';
 
-    const filteredMenu = category === 'all' 
+    let filteredMenu = category === 'all' 
         ? MENU_DATA 
         : MENU_DATA.filter(item => item.category === category);
+
+    // Lọc theo tên sản phẩm
+    if (searchQuery.trim()) {
+        filteredMenu = filteredMenu.filter(item => 
+            item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            item.description.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+    }
+
+    // Hiển thị empty state nếu không có kết quả
+    if (filteredMenu.length === 0) {
+        menuContainer.innerHTML = `
+            <div class="empty-state" style="grid-column: 1/-1;">
+                <div class="empty-icon">🔍</div>
+                <p>Không tìm thấy món ăn nào</p>
+            </div>
+        `;
+        return;
+    }
 
     filteredMenu.forEach(product => {
         const menuItem = document.createElement('div');
@@ -441,9 +566,11 @@ function updateCartItemQty(productId, quantity) {
 }
 
 function removeCartItem(productId) {
-    appState.removeFromCart(productId);
-    renderCart();
-    showNotification('Đã xóa khỏi giỏ hàng', 'info');
+    if (confirm('Bạn có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng?')) {
+        appState.removeFromCart(productId);
+        renderCart();
+        showNotification('Đã xóa khỏi giỏ hàng', 'info');
+    }
 }
 
 function updateCartCount() {
@@ -460,7 +587,7 @@ function renderOrders() {
 
     if (appState.orders.length === 0) {
         ordersList.style.display = 'none';
-        emptyOrders.style.display = 'block';
+        emptyOrders.style.display = 'flex';
     } else {
         ordersList.style.display = 'grid';
         emptyOrders.style.display = 'none';
@@ -627,6 +754,16 @@ function startCheckout() {
     }
 
     renderCheckoutSummary();
+    
+    // Tự động điền thông tin đã lưu
+    const savedInfo = appState.loadCheckoutInfo();
+    if (savedInfo) {
+        document.getElementById('customerName').value = savedInfo.customerName || '';
+        document.getElementById('customerPhone').value = savedInfo.customerPhone || '';
+        document.getElementById('customerEmail').value = savedInfo.customerEmail || '';
+        document.getElementById('customerAddress').value = savedInfo.customerAddress || '';
+    }
+    
     openModal('checkoutModal');
 }
 
@@ -639,46 +776,98 @@ function renderCheckoutSummary() {
         </div>
     `).join('');
 
-    document.getElementById('checkoutTotal').textContent = formatCurrency(appState.getCartTotal());
+    const subtotal = appState.getCartTotal();
+    const discount = appState.getDiscount();
+    const total = appState.getFinalTotal();
+
+    document.getElementById('checkoutSubtotal').textContent = formatCurrency(subtotal);
+    
+    // Hiển thị discount nếu có
+    const discountRow = document.getElementById('discountRow');
+    if (discount > 0) {
+        discountRow.style.display = 'flex';
+        document.getElementById('checkoutDiscount').textContent = formatCurrency(discount);
+        if (appState.appliedPromo.type === 'percent') {
+            document.getElementById('discountLabel').textContent = `Giảm Giá (${appState.appliedPromo.value}%):`;
+        }
+    } else {
+        discountRow.style.display = 'none';
+    }
+    
+    document.getElementById('checkoutTotal').textContent = formatCurrency(total);
 }
 
 function submitOrder() {
     const form = document.getElementById('checkoutForm');
+    const submitBtn = document.getElementById('submitOrderBtn');
 
     if (!form.checkValidity()) {
         showNotification('Vui lòng điền đầy đủ thông tin', 'error');
         return;
     }
 
-    const orderData = {
-        customerName: document.getElementById('customerName').value,
-        customerPhone: document.getElementById('customerPhone').value,
-        customerEmail: document.getElementById('customerEmail').value,
-        customerAddress: document.getElementById('customerAddress').value,
-        paymentMethod: document.querySelector('input[name="paymentMethod"]:checked').value,
-        orderNote: document.getElementById('orderNote').value,
-        items: appState.cart,
-        total: appState.getCartTotal()
-    };
+    // Hiển thị loading
+    submitBtn.disabled = true;
+    submitBtn.classList.add('loading');
+    const originalText = submitBtn.textContent;
+    submitBtn.innerHTML = '<span class="loading-spinner"></span>Đang xử lý...';
 
-    const order = appState.addOrder(orderData);
+    // Simulate processing time
+    setTimeout(() => {
+        const customerName = document.getElementById('customerName').value;
+        const customerPhone = document.getElementById('customerPhone').value;
+        const customerEmail = document.getElementById('customerEmail').value;
+        const customerAddress = document.getElementById('customerAddress').value;
 
-    
-    appState.clearCart();
-    renderCart();
+        const orderData = {
+            customerName: customerName,
+            customerPhone: customerPhone,
+            customerEmail: customerEmail,
+            customerAddress: customerAddress,
+            paymentMethod: document.querySelector('input[name="paymentMethod"]:checked').value,
+            orderNote: document.getElementById('orderNote').value,
+            items: appState.cart,
+            total: appState.getFinalTotal(),
+            promoCode: appState.appliedPromo ? appState.appliedPromo.code : null,
+            discount: appState.getDiscount()
+        };
 
-    
-    closeModal('checkoutModal');
-    closeModal('cartModal');
+        // Lưu thông tin thanh toán
+        appState.saveCheckoutInfo({
+            customerName: customerName,
+            customerPhone: customerPhone,
+            customerEmail: customerEmail,
+            customerAddress: customerAddress
+        });
 
-    showNotification(`Đơn hàng ${order.id} đã được tạo thành công!`, 'success');
+        const order = appState.addOrder(orderData);
 
+        
+        appState.clearCart();
+        renderCart();
 
-    form.reset();
+        
+        closeModal('checkoutModal');
+        closeModal('cartModal');
 
+        showNotification(`Đơn hàng ${order.id} đã được tạo thành công!`, 'success');
 
-    navigateToSection('orders');
-    renderOrders();
+        // Reset form và promo
+        form.reset();
+        appState.removePromoCode();
+        document.getElementById('promoCode').disabled = false;
+        document.getElementById('applyPromoBtn').style.display = 'inline-block';
+        document.getElementById('removePromoBtn').style.display = 'none';
+        document.getElementById('promoMessage').style.display = 'none';
+
+        // Reset button
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('loading');
+        submitBtn.textContent = originalText;
+
+        navigateToSection('orders');
+        renderOrders();
+    }, 1500);
 }
 
 
@@ -705,8 +894,15 @@ document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             const category = btn.getAttribute('data-category');
-            renderMenu(category);
+            appState.currentCategory = category;
+            renderMenu(category, appState.searchQuery);
         });
+    });
+
+    // Event listener cho search input
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+        appState.searchQuery = e.target.value;
+        renderMenu(appState.currentCategory, appState.searchQuery);
     });
 
     
@@ -740,6 +936,38 @@ document.addEventListener('DOMContentLoaded', function() {
 
     
     document.getElementById('checkoutBtn').addEventListener('click', startCheckout);
+
+    // Event listeners cho promo code
+    document.getElementById('applyPromoBtn').addEventListener('click', () => {
+        const code = document.getElementById('promoCode').value.trim();
+        if (!code) {
+            showMessagePromo('Vui lòng nhập mã giảm giá', 'error');
+            return;
+        }
+        
+        const promo = appState.applyPromoCode(code);
+        if (!promo) {
+            showMessagePromo('Mã giảm giá không hợp lệ', 'error');
+            document.getElementById('promoCode').value = '';
+            return;
+        }
+        
+        showMessagePromo(`Áp dụng thành công: ${promo.description}`, 'success');
+        document.getElementById('applyPromoBtn').style.display = 'none';
+        document.getElementById('removePromoBtn').style.display = 'inline-block';
+        document.getElementById('promoCode').disabled = true;
+        renderCheckoutSummary();
+    });
+
+    document.getElementById('removePromoBtn').addEventListener('click', () => {
+        appState.removePromoCode();
+        document.getElementById('promoCode').value = '';
+        document.getElementById('promoCode').disabled = false;
+        document.getElementById('applyPromoBtn').style.display = 'inline-block';
+        document.getElementById('removePromoBtn').style.display = 'none';
+        document.getElementById('promoMessage').style.display = 'none';
+        renderCheckoutSummary();
+    });
 
     
     document.getElementById('submitOrderBtn').addEventListener('click', submitOrder);

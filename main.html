@@ -61,6 +61,10 @@
                 <p>Chọn những món ăn ngon nhất của chúng tôi</p>
             </div>
 
+            <div class="menu-search">
+                <input type="text" id="searchInput" placeholder="🔍 Tìm kiếm món ăn...">
+            </div>
+
             <div class="menu-filters">
                 <button class="filter-btn active" data-category="all">Tất Cả</button>
                 <button class="filter-btn" data-category="burger">Burger</button>
@@ -84,9 +88,10 @@
                 <div class="orders-list" id="ordersList">
 
                 </div>
-                <div id="emptyOrders" class="empty-state">
+                <div id="emptyOrders" class="empty-state empty-state-with-btn">
                     <div class="empty-icon">📋</div>
                     <p>Chưa có đơn hàng nào</p>
+                    <button class="btn btn-primary" onclick="navigateToSection('menu')">Quay Lại Menu</button>
                 </div>
             </div>
         </section>
@@ -267,10 +272,28 @@
                         <textarea id="orderNote" rows="3" placeholder="Ghi chú thêm..."></textarea>
                     </div>
 
+                    <div class="form-section">
+                        <h4>Mã Giảm Giá</h4>
+                        <div class="promo-input-group">
+                            <input type="text" id="promoCode" placeholder="Nhập mã giảm giá (VD: SUMMER50, NEWYEAR20)">
+                            <button type="button" class="btn btn-secondary" id="applyPromoBtn">Áp Dụng</button>
+                            <button type="button" class="btn btn-secondary" id="removePromoBtn" style="display:none;">Xóa Mã</button>
+                        </div>
+                        <div id="promoMessage"></div>
+                    </div>
+
                     <div class="order-summary">
                         <h4>Tóm Tắt Đơn Hàng</h4>
                         <div id="checkoutItems"></div>
                         <div class="summary-divider"></div>
+                        <div class="summary-row">
+                            <span>Tổng Tiền:</span>
+                            <span id="checkoutSubtotal">0 VNĐ</span>
+                        </div>
+                        <div class="summary-row" id="discountRow" style="display:none; color: var(--success-color);">
+                            <span id="discountLabel">Giảm Giá:</span>
+                            <span id="checkoutDiscount">0 VNĐ</span>
+                        </div>
                         <div class="summary-total">
                             <span>Tổng Cộng:</span>
                             <span id="checkoutTotal">0 VNĐ</span>
