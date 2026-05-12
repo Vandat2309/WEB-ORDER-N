@@ -15,7 +15,7 @@ const MENU_DATA = [
         price: 39000,
         description: 'Burger cổ điển với thịt bò, phô mai, xà lách và cà chua',
         emoji: '🍔',
-        image: 'image/clasic buger.jpg',
+        image: 'image/classic burger.jpg',
         rating: 4.5,
         ratingCount: 150
     },
@@ -26,7 +26,7 @@ const MENU_DATA = [
         price: 45000,
         description: 'Burger với 2 lớp phô mai mozzarella và thịt bò tươi',
         emoji: '🧀',
-        image: 'image/Cheese Buger.jpg',
+        image: 'image/Cheese Burger.jpg',
         rating: 4.7,
         ratingCount: 200
     },
@@ -37,7 +37,7 @@ const MENU_DATA = [
         price: 55000,
         description: 'Burger với bacon, trứng, phô mai và sốt đặc biệt',
         emoji: '🥓',
-        image: 'image/bacon burger.jpg',
+        image: 'image/Bacon Burger.jpg',
         rating: 4.8,
         ratingCount: 180
     },
@@ -48,7 +48,7 @@ const MENU_DATA = [
         price: 48000,
         description: 'Burger cay nồng với ớt, xà lách cay và sốt ớt tươi',
         emoji: '🌶️',
-        image: 'image/spicy burger.jpg',
+        image: 'image/Spicy Burger.jpg',
         rating: 4.3,
         ratingCount: 120
     },
@@ -59,7 +59,7 @@ const MENU_DATA = [
         price: 65000,
         description: 'Pizza cơ bản với cà chua, phô mai mozzarella và rau thơm',
         emoji: '🍕',
-        image: 'image/margherita pizza.jpg',
+        image: 'image/Margherita Pizza.jpg',
         rating: 4.6,
         ratingCount: 220
     },
@@ -81,7 +81,7 @@ const MENU_DATA = [
         price: 95000,
         description: 'Pizza hải sản với tôm, mực, cơm và phô mai',
         emoji: '🦐',
-        image: 'image/seafood pizza.jpg',
+        image: 'image/Seafood Pizza.jpg',
         rating: 4.8,
         ratingCount: 180
     },
@@ -136,7 +136,7 @@ const MENU_DATA = [
         price: 20000,
         description: 'Cà phê đen đá lạnh ngon tuyệt',
         emoji: '☕',
-        image: 'image/iced coffee.jpg',
+        image: 'image/Iced Coffee.jpg',
         rating: 4.5,
         ratingCount: 350
     },
@@ -147,7 +147,7 @@ const MENU_DATA = [
         price: 35000,
         description: 'Bánh chocolate mềm mịn với kem tươi',
         emoji: '🍰',
-        image: 'image/chocolate cake.jpg',
+        image: 'image/Chocolate Cake.jpg',
         rating: 4.7,
         ratingCount: 200
     },
@@ -158,7 +158,7 @@ const MENU_DATA = [
         price: 22000,
         description: 'Kem lạnh với các hương vị khác nhau',
         emoji: '🍦',
-        image: 'image/ice cream.jpg',
+        image: 'image/Ice Cream.jpg',
         rating: 4.6,
         ratingCount: 280
     },
@@ -169,7 +169,7 @@ const MENU_DATA = [
         price: 18000,
         description: 'Bánh donut mềm mịn với đường cặn',
         emoji: '🍩',
-        image: 'image/donut.jpg',
+        image: 'image/Donut.jpg',
         rating: 4.4,
         ratingCount: 160
     },
@@ -191,7 +191,7 @@ const MENU_DATA = [
         price: 35000,
         description: 'Phở bò truyền thống với nước dùng vị thơm, thịt bò mềm',
         emoji: '🍜',
-        image: 'image/pho bo.jpg',
+        image: 'image/Pho bo.jpg',
         rating: 4.9,
         ratingCount: 450
     },
@@ -202,7 +202,7 @@ const MENU_DATA = [
         price: 38000,
         description: 'Bún chả Hà Nội với thịt nướng, chả cốm, rau sạch',
         emoji: '🍲',
-        image: 'image/bun cha.jpg',
+        image: 'image/Bun cha.jpg',
         rating: 4.8,
         ratingCount: 380
     },
@@ -213,7 +213,7 @@ const MENU_DATA = [
         price: 42000,
         description: 'Mỳ Quảng đặc trưng với tỏi, nước dừa, thịt gà và tôm',
         emoji: '🍝',
-        image: 'image/my quang.jpeg',
+        image: 'image/My quang.jpeg',
         rating: 4.7,
         ratingCount: 320
     },
@@ -224,7 +224,7 @@ const MENU_DATA = [
         price: 48000,
         description: 'Gà rán giòn với công thức truyền thống, ăn kèm nước mắm chua',
         emoji: '🍗',
-        image: 'image/ga ran.jpg',
+        image: 'image/Ga ran.jpg',
         rating: 4.8,
         ratingCount: 410
     },
