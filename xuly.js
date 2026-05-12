@@ -903,72 +903,56 @@ function submitOrder() {
     const form = document.getElementById('checkoutForm');
     const submitBtn = document.getElementById('submitOrderBtn');
 
+    // 1. Kiểm tra nếu form hợp lệ
     if (!form.checkValidity()) {
-        showNotification('Vui lòng điền đầy đủ thông tin', 'error');
+        form.reportValidity(); // Hiển thị lỗi cụ thể của trình duyệt cho người dùng thấy
         return;
     }
 
-    // Hiển thị loading
+    // 2. Hiển thị trạng thái đang xử lý
     submitBtn.disabled = true;
     submitBtn.classList.add('loading');
     const originalText = submitBtn.textContent;
-    submitBtn.innerHTML = '<span class="loading-spinner"></span>Đang xử lý...';
+    submitBtn.innerHTML = '<span class="loading-spinner"></span> Đang xử lý...';
 
-    // Simulate processing time
+    // 3. Giả lập gửi dữ liệu (1.5 giây)
     setTimeout(() => {
-        const customerName = document.getElementById('customerName').value;
-        const customerPhone = document.getElementById('customerPhone').value;
-        const customerEmail = document.getElementById('customerEmail').value;
-        const customerAddress = document.getElementById('customerAddress').value;
+        try {
+            const orderData = {
+                customerName: document.getElementById('customerName').value,
+                customerPhone: document.getElementById('customerPhone').value,
+                customerEmail: document.getElementById('customerEmail').value,
+                customerAddress: document.getElementById('customerAddress').value,
+                paymentMethod: document.querySelector('input[name="paymentMethod"]:checked').value,
+                orderNote: document.getElementById('orderNote').value,
+                items: [...appState.cart], // Copy mảng để tránh lỗi tham chiếu
+                total: appState.getFinalTotal(),
+                createdAt: new Date().toLocaleString('vi-VN')
+            };
 
-        const orderData = {
-            customerName: customerName,
-            customerPhone: customerPhone,
-            customerEmail: customerEmail,
-            customerAddress: customerAddress,
-            paymentMethod: document.querySelector('input[name="paymentMethod"]:checked').value,
-            orderNote: document.getElementById('orderNote').value,
-            items: appState.cart,
-            total: appState.getFinalTotal(),
-            promoCode: appState.appliedPromo ? appState.appliedPromo.code : null,
-            discount: appState.getDiscount()
-        };
+            const order = appState.addOrder(orderData);
+            
+            appState.clearCart();
+            renderCart();
+            
+            closeModal('checkoutModal');
+            closeModal('cartModal');
 
-        // Lưu thông tin thanh toán
-        appState.saveCheckoutInfo({
-            customerName: customerName,
-            customerPhone: customerPhone,
-            customerEmail: customerEmail,
-            customerAddress: customerAddress
-        });
-
-        const order = appState.addOrder(orderData);
-
-        
-        appState.clearCart();
-        renderCart();
-
-        
-        closeModal('checkoutModal');
-        closeModal('cartModal');
-
-        showNotification(`Đơn hàng ${order.id} đã được tạo thành công!`, 'success');
-
-        // Reset form và promo
-        form.reset();
-        appState.removePromoCode();
-        document.getElementById('promoCode').disabled = false;
-        document.getElementById('applyPromoBtn').style.display = 'inline-block';
-        document.getElementById('removePromoBtn').style.display = 'none';
-        document.getElementById('promoMessage').style.display = 'none';
-
-        // Reset button
-        submitBtn.disabled = false;
-        submitBtn.classList.remove('loading');
-        submitBtn.textContent = originalText;
-
-        navigateToSection('orders');
-        renderOrders();
+            showNotification(`Đơn hàng ${order.id} đã được tạo thành công!`, 'success');
+            
+            form.reset();
+            appState.removePromoCode();
+            
+            navigateToSection('orders');
+            renderOrders();
+        } catch (error) {
+            console.error("Lỗi xác nhận đơn hàng:", error);
+            showNotification('Có lỗi xảy ra, vui lòng thử lại', 'error');
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.classList.remove('loading');
+            submitBtn.textContent = originalText;
+        }
     }, 1500);
 }
 
