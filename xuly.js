@@ -15,7 +15,7 @@ const MENU_DATA = [
         price: 39000,
         description: 'Burger cổ điển với thịt bò, phô mai, xà lách và cà chua',
         emoji: '🍔',
-        image: 'image/classic burger.jpg',
+        image: 'image/clasic buger.jpg',
         rating: 4.5,
         ratingCount: 150
     },
@@ -26,7 +26,7 @@ const MENU_DATA = [
         price: 45000,
         description: 'Burger với 2 lớp phô mai mozzarella và thịt bò tươi',
         emoji: '🧀',
-        image: 'image/Cheese Burger.jpg',
+        image: 'image/Cheese Buger.jpg',
         rating: 4.7,
         ratingCount: 200
     },
@@ -81,7 +81,7 @@ const MENU_DATA = [
         price: 95000,
         description: 'Pizza hải sản với tôm, mực, cơm và phô mai',
         emoji: '🦐',
-        image: 'image/Seafood Pizza.jpg',
+        image: 'image/Seafood pizza.jpg',
         rating: 4.8,
         ratingCount: 180
     },
@@ -315,6 +315,18 @@ function escapeHtml(str) {
         .replace(/>/g, '&gt;');
 }
 
+/**
+ * Đường dẫn ảnh local cho GitHub Pages: encode khoảng trắng/ký tự đặc biệt;
+ * URL http(s) giữ nguyên. Tên file phải trùng y hệt repo (Linux phân biệt HOA/thường).
+ */
+function assetUrl(path) {
+    if (!path || typeof path !== 'string') return '';
+    const t = path.trim();
+    if (!t) return '';
+    if (/^https?:\/\//i.test(t)) return t;
+    return t.split('/').map((seg) => encodeURIComponent(seg)).join('/');
+}
+
 /** Hiển thị ảnh món; nếu lỗi tải thì fallback emoji (class --error xử lý trong CSS). */
 function foodThumbMarkup(product, photoClass) {
     const emoji = escapeHtml(product.emoji || '');
@@ -323,7 +335,7 @@ function foodThumbMarkup(product, photoClass) {
     if (!raw) {
         return emoji;
     }
-    const src = escapeHtml(raw);
+    const src = escapeHtml(assetUrl(raw));
     return `<img class="${photoClass}" src="${src}" alt="${name}" loading="lazy" decoding="async" onerror="this.classList.add('food-photo--error')"><span class="food-thumb-emoji" aria-hidden="true">${emoji}</span>`;
 }
 
@@ -683,7 +695,7 @@ function showProductDetail(productId) {
     };
     if (src) {
         imgEl.alt = product.name || '';
-        imgEl.src = src;
+        imgEl.src = assetUrl(src);
         if (imgEl.complete) {
             if (imgEl.naturalWidth > 0) {
                 imgEl.style.display = 'block';
