@@ -472,6 +472,32 @@ input:focus, textarea:focus, select:focus {
     align-items: center;
     justify-content: center;
     font-size: 4rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.menu-item-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.menu-item-photo.food-photo--error {
+    display: none;
+}
+
+.menu-item-image .food-thumb-emoji {
+    display: none;
+    position: absolute;
+    inset: 0;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+}
+
+.menu-item-image:has(.menu-item-photo.food-photo--error) .food-thumb-emoji {
+    display: flex;
 }
 
 .menu-item-body {
@@ -816,6 +842,34 @@ input:focus, textarea:focus, select:focus {
     justify-content: center;
     font-size: 2rem;
     flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.cart-item-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 0.5rem;
+}
+
+.cart-item-photo.food-photo--error {
+    display: none;
+}
+
+.cart-item-image .food-thumb-emoji {
+    display: none;
+    position: absolute;
+    inset: 0;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    border-radius: 0.5rem;
+}
+
+.cart-item-image:has(.cart-item-photo.food-photo--error) .food-thumb-emoji {
+    display: flex;
 }
 
 .cart-item-info {
@@ -935,11 +989,24 @@ input:focus, textarea:focus, select:focus {
     align-items: center;
     justify-content: center;
     font-size: 5rem;
+    position: relative;
+    overflow: hidden;
 }
 
 .product-image img {
-    max-width: 100%;
-    max-height: 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0.5rem;
+}
+
+.product-image-fallback {
+    display: none;
+    position: absolute;
+    inset: 0;
+    align-items: center;
+    justify-content: center;
+    font-size: 5rem;
 }
 
 .product-info {
@@ -1271,7 +1338,7 @@ input:focus, textarea:focus, select:focus {
     padding-bottom: 0.5rem;
 }
 
-
+@media (max-width: 768px) {
     .header-container {
         flex-wrap: wrap;
         gap: var(--spacing-md);

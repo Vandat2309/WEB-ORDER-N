@@ -8,7 +8,6 @@ const PROMO_CODES = {
 };
 
 const MENU_DATA = [
-   
     {
         id: 1,
         name: 'Classic Burger',
@@ -16,6 +15,7 @@ const MENU_DATA = [
         price: 39000,
         description: 'Burger cổ điển với thịt bò, phô mai, xà lách và cà chua',
         emoji: '🍔',
+        image: 'image/clasic buger.jpg',
         rating: 4.5,
         ratingCount: 150
     },
@@ -26,6 +26,7 @@ const MENU_DATA = [
         price: 45000,
         description: 'Burger với 2 lớp phô mai mozzarella và thịt bò tươi',
         emoji: '🧀',
+        image: 'image/Cheese Buger.jpg',
         rating: 4.7,
         ratingCount: 200
     },
@@ -36,6 +37,7 @@ const MENU_DATA = [
         price: 55000,
         description: 'Burger với bacon, trứng, phô mai và sốt đặc biệt',
         emoji: '🥓',
+        image: 'image/bacon burger.jpg',
         rating: 4.8,
         ratingCount: 180
     },
@@ -44,13 +46,12 @@ const MENU_DATA = [
         name: 'Spicy Burger',
         category: 'burger',
         price: 48000,
-        description: 'Burger cay nồn với ớt, xà lách cay và sốt ớt tươi',
+        description: 'Burger cay nồng với ớt, xà lách cay và sốt ớt tươi',
         emoji: '🌶️',
+        image: 'image/spicy burger.jpg',
         rating: 4.3,
         ratingCount: 120
     },
-
-    
     {
         id: 5,
         name: 'Margherita Pizza',
@@ -58,6 +59,7 @@ const MENU_DATA = [
         price: 65000,
         description: 'Pizza cơ bản với cà chua, phô mai mozzarella và rau thơm',
         emoji: '🍕',
+        image: 'image/margherita pizza.jpg',
         rating: 4.6,
         ratingCount: 220
     },
@@ -68,6 +70,7 @@ const MENU_DATA = [
         price: 75000,
         description: 'Pizza với pepperoni, phô mai và sốt cà chua tươi',
         emoji: '🍕',
+        image: 'image/pepperoni pizza.jpg',
         rating: 4.7,
         ratingCount: 250
     },
@@ -78,6 +81,7 @@ const MENU_DATA = [
         price: 95000,
         description: 'Pizza hải sản với tôm, mực, cơm và phô mai',
         emoji: '🦐',
+        image: 'image/seafood pizza.jpg',
         rating: 4.8,
         ratingCount: 180
     },
@@ -88,11 +92,10 @@ const MENU_DATA = [
         price: 60000,
         description: 'Pizza chay với rau quả tươi, đậu và phô mai',
         emoji: '🥦',
+        image: 'image/Vegetarian Pizza.jpg',
         rating: 4.4,
         ratingCount: 100
     },
-
-   
     {
         id: 9,
         name: 'Coca Cola',
@@ -100,6 +103,7 @@ const MENU_DATA = [
         price: 15000,
         description: 'Nước ngọt Coca Cola lạnh mát',
         emoji: '🥤',
+        image: 'image/coca cola.jpg',
         rating: 4.2,
         ratingCount: 500
     },
@@ -110,6 +114,7 @@ const MENU_DATA = [
         price: 18000,
         description: 'Nước tăng lực Sting giải khát',
         emoji: '⚡',
+        image: 'image/sting.jpg',
         rating: 4.1,
         ratingCount: 300
     },
@@ -120,6 +125,7 @@ const MENU_DATA = [
         price: 25000,
         description: 'Nước ép trái cây tươi 100% tự nhiên',
         emoji: '🧃',
+        image: 'image/Fresh Juice.png',
         rating: 4.6,
         ratingCount: 180
     },
@@ -130,11 +136,10 @@ const MENU_DATA = [
         price: 20000,
         description: 'Cà phê đen đá lạnh ngon tuyệt',
         emoji: '☕',
+        image: 'image/iced coffee.jpg',
         rating: 4.5,
         ratingCount: 350
     },
-
-
     {
         id: 13,
         name: 'Chocolate Cake',
@@ -142,6 +147,7 @@ const MENU_DATA = [
         price: 35000,
         description: 'Bánh chocolate mềm mịn với kem tươi',
         emoji: '🍰',
+        image: 'image/chocolate cake.jpg',
         rating: 4.7,
         ratingCount: 200
     },
@@ -152,6 +158,7 @@ const MENU_DATA = [
         price: 22000,
         description: 'Kem lạnh với các hương vị khác nhau',
         emoji: '🍦',
+        image: 'image/ice cream.jpg',
         rating: 4.6,
         ratingCount: 280
     },
@@ -162,6 +169,7 @@ const MENU_DATA = [
         price: 18000,
         description: 'Bánh donut mềm mịn với đường cặn',
         emoji: '🍩',
+        image: 'image/donut.jpg',
         rating: 4.4,
         ratingCount: 160
     },
@@ -172,10 +180,10 @@ const MENU_DATA = [
         price: 40000,
         description: 'Tiramisu Ý truyền thống cổ điển',
         emoji: '🍪',
+        image: 'image/Tiramisu.jpg',
         rating: 4.8,
         ratingCount: 120
     },
-
     {
         id: 17,
         name: 'Phở Bò',
@@ -183,6 +191,7 @@ const MENU_DATA = [
         price: 35000,
         description: 'Phở bò truyền thống với nước dùng vị thơm, thịt bò mềm',
         emoji: '🍜',
+        image: 'image/pho bo.jpg',
         rating: 4.9,
         ratingCount: 450
     },
@@ -193,6 +202,7 @@ const MENU_DATA = [
         price: 38000,
         description: 'Bún chả Hà Nội với thịt nướng, chả cốm, rau sạch',
         emoji: '🍲',
+        image: 'image/bun cha.jpg',
         rating: 4.8,
         ratingCount: 380
     },
@@ -203,6 +213,7 @@ const MENU_DATA = [
         price: 42000,
         description: 'Mỳ Quảng đặc trưng với tỏi, nước dừa, thịt gà và tôm',
         emoji: '🍝',
+        image: 'image/my quang.jpeg',
         rating: 4.7,
         ratingCount: 320
     },
@@ -213,6 +224,7 @@ const MENU_DATA = [
         price: 48000,
         description: 'Gà rán giòn với công thức truyền thống, ăn kèm nước mắm chua',
         emoji: '🍗',
+        image: 'image/ga ran.jpg',
         rating: 4.8,
         ratingCount: 410
     },
@@ -223,6 +235,7 @@ const MENU_DATA = [
         price: 36000,
         description: 'Cơm tấm Sài Gòn với sườn nướng, chả trứng, trứng ốp la',
         emoji: '🍚',
+        image: 'image/com tam.jpg',
         rating: 4.7,
         ratingCount: 340
     },
@@ -233,6 +246,7 @@ const MENU_DATA = [
         price: 32000,
         description: 'Bánh mì giòn với thịt nướng, pâté, rau sạch tươi ngon',
         emoji: '🥖',
+        image: 'image/banh mi.jpg',
         rating: 4.6,
         ratingCount: 360
     },
@@ -243,6 +257,7 @@ const MENU_DATA = [
         price: 34000,
         description: 'Hủ tiếu Nam Vang với tôm, cua, giò heo và rau',
         emoji: '🍤',
+        image: 'image/hu tieu.jpg',
         rating: 4.7,
         ratingCount: 300
     },
@@ -253,6 +268,7 @@ const MENU_DATA = [
         price: 39000,
         description: 'Bún riêu cua nóng hổi với tôm, cua, trứng cua',
         emoji: '🦀',
+        image: 'image/bun rieu cua.jpg',
         rating: 4.8,
         ratingCount: 370
     },
@@ -263,6 +279,7 @@ const MENU_DATA = [
         price: 45000,
         description: 'Chả cá tươi với cà chua, nước dùng thơm, bún tươi',
         emoji: '🐟',
+        image: 'image/cha ca la vong.jpg',
         rating: 4.9,
         ratingCount: 290
     },
@@ -273,10 +290,42 @@ const MENU_DATA = [
         price: 28000,
         description: 'Canh cà chua chua ngọt với cá, tôm, thơm lừng',
         emoji: '🍅',
+        image: 'image/canh ca chua.jpg',
         rating: 4.6,
         ratingCount: 250
+    },
+    {
+        id: 27,
+        name: 'Revive',
+        category: 'drink',
+        price: 15000,
+        description: 'Nước ngọt Revive lạnh mát',
+        emoji: '🥤',
+        image: 'image/revive.jpg',
+        rating: 4.2,
+        ratingCount: 500
     }
 ];
+
+function escapeHtml(str) {
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+}
+
+/** Hiển thị ảnh món; nếu lỗi tải thì fallback emoji (class --error xử lý trong CSS). */
+function foodThumbMarkup(product, photoClass) {
+    const emoji = escapeHtml(product.emoji || '');
+    const name = escapeHtml(product.name || '');
+    const raw = typeof product.image === 'string' ? product.image.trim() : '';
+    if (!raw) {
+        return emoji;
+    }
+    const src = escapeHtml(raw);
+    return `<img class="${photoClass}" src="${src}" alt="${name}" loading="lazy" decoding="async" onerror="this.classList.add('food-photo--error')"><span class="food-thumb-emoji" aria-hidden="true">${emoji}</span>`;
+}
 
 
 class AppState {
@@ -576,7 +625,7 @@ function renderMenu(category = 'all', searchQuery = '') {
         const menuItem = document.createElement('div');
         menuItem.className = 'menu-item';
         menuItem.innerHTML = `
-            <div class="menu-item-image">${product.emoji}</div>
+            <div class="menu-item-image">${foodThumbMarkup(product, 'menu-item-photo')}</div>
             <div class="menu-item-body">
                 <div class="menu-item-name">${product.name}</div>
                 <span class="menu-item-category">${getCategoryLabel(product.category)}</span>
@@ -612,7 +661,43 @@ function showProductDetail(productId) {
     appState.currentProduct = product;
 
     document.getElementById('productName').textContent = product.name;
-    document.getElementById('productImage').textContent = product.emoji;
+
+    const imgEl = document.getElementById('productImage');
+    const imgBox = imgEl.closest('.product-image');
+    let fb = imgBox.querySelector('.product-image-fallback');
+    if (!fb) {
+        fb = document.createElement('span');
+        fb.className = 'product-image-fallback';
+        fb.setAttribute('aria-hidden', 'true');
+        imgBox.appendChild(fb);
+    }
+    fb.textContent = product.emoji || '';
+    const src = typeof product.image === 'string' ? product.image.trim() : '';
+    imgEl.onload = () => {
+        imgEl.style.display = 'block';
+        fb.style.display = 'none';
+    };
+    imgEl.onerror = () => {
+        imgEl.style.display = 'none';
+        fb.style.display = 'flex';
+    };
+    if (src) {
+        imgEl.alt = product.name || '';
+        imgEl.src = src;
+        if (imgEl.complete) {
+            if (imgEl.naturalWidth > 0) {
+                imgEl.style.display = 'block';
+                fb.style.display = 'none';
+            } else {
+                imgEl.style.display = 'none';
+                fb.style.display = 'flex';
+            }
+        }
+    } else {
+        imgEl.removeAttribute('src');
+        imgEl.style.display = 'none';
+        fb.style.display = 'flex';
+    }
     document.getElementById('productDescription').textContent = product.description;
     document.getElementById('productRating').textContent = '⭐'.repeat(Math.round(product.rating));
     document.getElementById('productRatingCount').textContent = `(${product.ratingCount})`;
@@ -639,7 +724,7 @@ function renderCart() {
 
         cartItemsContainer.innerHTML = appState.cart.map(item => `
             <div class="cart-item">
-                <div class="cart-item-image">${item.emoji}</div>
+                <div class="cart-item-image">${foodThumbMarkup(item, 'cart-item-photo')}</div>
                 <div class="cart-item-info">
                     <div class="cart-item-name">${item.name}</div>
                     <div class="cart-item-price">${formatCurrency(item.price)}</div>
