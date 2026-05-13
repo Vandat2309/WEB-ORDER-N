@@ -7,6 +7,15 @@ const PROMO_CODES = {
     'WELCOME10': { type: 'percent', value: 10, description: 'Giảm 10%' },
 };
 
+/** Hiệu ứng nảy icon giỏ khi thêm món (gọi từ addToCart). */
+function animateCartBtn() {
+    const btn = document.getElementById('cartBtn');
+    if (!btn) return;
+    btn.classList.remove('cart-btn--bounce');
+    void btn.offsetWidth;
+    btn.classList.add('cart-btn--bounce');
+}
+
 const MENU_DATA = [
     {
         id: 1,
@@ -444,6 +453,7 @@ class AppState {
             });
         }
         this.saveCart();
+        animateCartBtn();
     }
 
     removeFromCart(productId) {
@@ -657,7 +667,32 @@ function navigateToSection(sectionId) {
     window.scrollTo(0, 0);
 }
 
+/** Alias cho nút landing (cùng chức năng navigateToSection). */
+function MapsToSection(sectionId) {
+    navigateToSection(sectionId);
+}
 
+async function copyPromoCode(code) {
+    const okMsg = `Đã sao chép mã ${code}`;
+    try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            await navigator.clipboard.writeText(code);
+        } else {
+            const ta = document.createElement('textarea');
+            ta.value = code;
+            ta.setAttribute('readonly', '');
+            ta.style.position = 'fixed';
+            ta.style.left = '-9999px';
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+        }
+        showNotification(okMsg, 'success');
+    } catch (e) {
+        showNotification('Không thể sao chép. Hãy chọn mã và copy thủ công.', 'error');
+    }
+}
 
 function renderMenu(category = 'all', searchQuery = '') {
     const menuContainer = document.getElementById('menuContainer');
@@ -1107,6 +1142,14 @@ function submitOrder() {
 
 
 document.addEventListener('DOMContentLoaded', function() {
+
+    const headerEl = document.querySelector('.header');
+    const syncHeaderScroll = () => {
+        if (!headerEl) return;
+        headerEl.classList.toggle('header--scrolled', window.scrollY > 16);
+    };
+    syncHeaderScroll();
+    window.addEventListener('scroll', syncHeaderScroll, { passive: true });
 
     renderMenu();
     renderCart();

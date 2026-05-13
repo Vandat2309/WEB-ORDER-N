@@ -91,26 +91,201 @@
 
     <main class="main-content">
         <section id="home" class="section active">
-            <div class="hero">
-                <div class="hero-content">
-                    <h2>Chào Mừng Đến FastFood Order</h2>
-                    <p>Hệ thống quản lý đặt hàng thức ăn nhanh chuyên nghiệp</p>
-                    <button class="btn btn-primary" onclick="navigateToSection('menu')">Xem Menu Ngay</button>
+            <div class="home-landing">
+                <div class="hero-shell">
+                    <div class="hero-decor" aria-hidden="true">
+                        <span class="hero-blob hero-blob--1"></span>
+                        <span class="hero-blob hero-blob--2"></span>
+                        <span class="hero-blob hero-blob--3"></span>
+                        <span class="hero-float-icon hero-float-icon--herb">🌿</span>
+                        <span class="hero-float-icon hero-float-icon--tomato">🍅</span>
+                        <span class="hero-float-icon hero-float-icon--chili">🌶️</span>
+                    </div>
+                    <div class="hero-landing-inner">
+                        <div class="hero-landing-grid">
+                            <div class="hero-landing-copy">
+                                <p class="hero-eyebrow">Giao nóng · Đặt trong 1 phút</p>
+                                <h2 class="hero-title">Đồ ăn ngon gõ cửa <span class="hero-title-accent">siêu tốc</span></h2>
+                                <p class="hero-lede">Burger nướng than, pizza phô mai chảy và món Việt đậm vị — đặt online, theo dõi đơn trực tiếp, ưu đãi mỗi ngày.</p>
+                                <div class="hero-cta-row">
+                                    <button type="button" class="btn btn-primary" onclick="navigateToSection('menu')">Khám phá menu</button>
+                                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('home-promo')?.scrollIntoView({ behavior: 'smooth', block: 'center' })">Săn mã giảm giá</button>
+                                </div>
+                            </div>
+                            <div class="hero-landing-visual">
+                                <div class="hero-image-ring" aria-hidden="true"></div>
+                                <div class="hero-image-frame">
+                                    <img
+                                        class="hero-float-img"
+                                        src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&amp;fit=crop&amp;w=960&amp;q=85"
+                                        alt="Burger phô mai thịt bò nóng hổi"
+                                        width="960"
+                                        height="960"
+                                        loading="eager"
+                                        decoding="async"
+                                        fetchpriority="high"
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hero-stats-bar" role="group" aria-label="Thống kê nhanh">
+                            <div class="hero-stat-card">
+                                <span class="hero-stat-ico" aria-hidden="true">🍱</span>
+                                <div class="hero-stat-num">150+</div>
+                                <div class="hero-stat-label">Món ăn</div>
+                            </div>
+                            <div class="hero-stat-card">
+                                <span class="hero-stat-ico" aria-hidden="true">👥</span>
+                                <div class="hero-stat-num">500+</div>
+                                <div class="hero-stat-label">Khách hàng</div>
+                            </div>
+                            <div class="hero-stat-card">
+                                <span class="hero-stat-ico" aria-hidden="true">⚡</span>
+                                <div class="hero-stat-num">24/7</div>
+                                <div class="hero-stat-label">Phục vụ</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="hero-stats">
-                    <div class="stat-item">
-                        <div class="stat-number">150+</div>
-                        <div class="stat-label">Món Ăn</div>
+
+                <section class="home-block home-how" aria-labelledby="home-how-title">
+                    <h2 id="home-how-title" class="home-block-title">Quy trình đặt hàng</h2>
+                    <p class="home-block-lede">Ba bước đơn giản — món nóng tới tay bạn</p>
+                    <div class="home-steps-row">
+                        <article class="home-step-card">
+                            <div class="home-step-icon" aria-hidden="true">🍔</div>
+                            <h3 class="home-step-title">1. Chọn món</h3>
+                            <p class="home-step-text">Lướt menu, xem ảnh thật và chọn size, sốt yêu thích.</p>
+                        </article>
+                        <span class="home-step-arrow" aria-hidden="true">➔</span>
+                        <article class="home-step-card">
+                            <div class="home-step-icon" aria-hidden="true">💳</div>
+                            <h3 class="home-step-title">2. Đặt hàng &amp; thanh toán</h3>
+                            <p class="home-step-text">Xác nhận giỏ, nhập mã khuyến mãi và hoàn tất đơn trong vài giây.</p>
+                        </article>
+                        <span class="home-step-arrow" aria-hidden="true">➔</span>
+                        <article class="home-step-card">
+                            <div class="home-step-icon" aria-hidden="true">🛵</div>
+                            <h3 class="home-step-title">3. Giao hàng siêu tốc</h3>
+                            <p class="home-step-text">Shipper đưa tận nơi — bạn chỉ việc mở hộp và thưởng thức.</p>
+                        </article>
                     </div>
-                    <div class="stat-item">
-                        <div class="stat-number">500+</div>
-                        <div class="stat-label">Khách Hàng</div>
+                </section>
+
+                <section class="home-block home-trending" aria-labelledby="home-trending-title">
+                    <h2 id="home-trending-title" class="home-block-title">Món ăn nổi bật</h2>
+                    <p class="home-block-lede">Best seller được khách order nhiều nhất tuần này</p>
+                    <div class="home-trending-grid">
+                        <article class="home-feature-card">
+                            <div class="home-feature-image">
+                                <img class="menu-item-photo" src="image/Pho bo.jpg" alt="Phở Bò" loading="lazy" decoding="async" onerror="this.classList.add('food-photo--error')">
+                                <span class="food-thumb-emoji" aria-hidden="true">🍜</span>
+                                <span class="home-feature-badge">Top 1</span>
+                            </div>
+                            <div class="home-feature-body">
+                                <h3 class="home-feature-name">Phở Bò</h3>
+                                <p class="home-feature-desc">Nước dùng thơm, thịt mềm — chuẩn vị truyền thống.</p>
+                                <div class="home-feature-meta">
+                                    <span class="home-feature-price">35.000&nbsp;₫</span>
+                                    <span class="home-feature-rating">⭐ 4,9</span>
+                                </div>
+                                <button type="button" class="menu-item-btn" onclick="showProductDetail(17)">Chi tiết</button>
+                            </div>
+                        </article>
+                        <article class="home-feature-card">
+                            <div class="home-feature-image">
+                                <img class="menu-item-photo" src="image/Bacon Burger.jpg" alt="Bacon Burger" loading="lazy" decoding="async" onerror="this.classList.add('food-photo--error')">
+                                <span class="food-thumb-emoji" aria-hidden="true">🥓</span>
+                                <span class="home-feature-badge">Bán chạy</span>
+                            </div>
+                            <div class="home-feature-body">
+                                <h3 class="home-feature-name">Bacon Burger</h3>
+                                <p class="home-feature-desc">Bacon giòn, trứng ốp la và sốt đặc biệt.</p>
+                                <div class="home-feature-meta">
+                                    <span class="home-feature-price">55.000&nbsp;₫</span>
+                                    <span class="home-feature-rating">⭐ 4,8</span>
+                                </div>
+                                <button type="button" class="menu-item-btn" onclick="showProductDetail(3)">Chi tiết</button>
+                            </div>
+                        </article>
+                        <article class="home-feature-card">
+                            <div class="home-feature-image">
+                                <img class="menu-item-photo" src="image/Seafood pizza.jpg" alt="Seafood Pizza" loading="lazy" decoding="async" onerror="this.classList.add('food-photo--error')">
+                                <span class="food-thumb-emoji" aria-hidden="true">🦐</span>
+                                <span class="home-feature-badge">Fan pizza</span>
+                            </div>
+                            <div class="home-feature-body">
+                                <h3 class="home-feature-name">Seafood Pizza</h3>
+                                <p class="home-feature-desc">Tôm mực tươi, phô mai kéo sợi hấp dẫn.</p>
+                                <div class="home-feature-meta">
+                                    <span class="home-feature-price">95.000&nbsp;₫</span>
+                                    <span class="home-feature-rating">⭐ 4,8</span>
+                                </div>
+                                <button type="button" class="menu-item-btn" onclick="showProductDetail(7)">Chi tiết</button>
+                            </div>
+                        </article>
+                        <article class="home-feature-card">
+                            <div class="home-feature-image">
+                                <img class="menu-item-photo" src="image/pepperoni pizza.jpg" alt="Pepperoni Pizza" loading="lazy" decoding="async" onerror="this.classList.add('food-photo--error')">
+                                <span class="food-thumb-emoji" aria-hidden="true">🍕</span>
+                                <span class="home-feature-badge">Must try</span>
+                            </div>
+                            <div class="home-feature-body">
+                                <h3 class="home-feature-name">Pepperoni Pizza</h3>
+                                <p class="home-feature-desc">Pepperoni cay nhẹ, lớp phô mai vàng óng.</p>
+                                <div class="home-feature-meta">
+                                    <span class="home-feature-price">75.000&nbsp;₫</span>
+                                    <span class="home-feature-rating">⭐ 4,7</span>
+                                </div>
+                                <button type="button" class="menu-item-btn" onclick="showProductDetail(6)">Chi tiết</button>
+                            </div>
+                        </article>
                     </div>
-                    <div class="stat-item">
-                        <div class="stat-number">24/7</div>
-                        <div class="stat-label">Phục Vụ</div>
+                    <div class="home-trending-cta">
+                        <button type="button" class="btn btn-primary btn-wide" onclick="MapsToSection('menu')">Xem toàn bộ menu</button>
                     </div>
-                </div>
+                </section>
+
+                <section id="home-promo" class="home-promo-banner" aria-labelledby="home-promo-title">
+                    <div class="home-promo-banner__bg" aria-hidden="true"></div>
+                    <div class="home-promo-banner__inner">
+                        <div class="home-promo-copy">
+                            <h2 id="home-promo-title" class="home-promo-title">Mã khuyến mãi ngập tràn</h2>
+                            <p class="home-promo-text">Dùng ngay khi thanh toán — tiết kiệm tới vài chục nghìn mỗi đơn.</p>
+                        </div>
+                        <ul class="home-promo-list">
+                            <li class="home-promo-chip">
+                                <div>
+                                    <span class="home-promo-code">SUMMER50</span>
+                                    <span class="home-promo-hint">Giảm 50.000&nbsp;₫</span>
+                                </div>
+                                <button type="button" class="btn btn-promo-copy" onclick="copyPromoCode('SUMMER50')">Copy</button>
+                            </li>
+                            <li class="home-promo-chip">
+                                <div>
+                                    <span class="home-promo-code">NEWYEAR20</span>
+                                    <span class="home-promo-hint">Giảm 20%</span>
+                                </div>
+                                <button type="button" class="btn btn-promo-copy" onclick="copyPromoCode('NEWYEAR20')">Copy</button>
+                            </li>
+                            <li class="home-promo-chip">
+                                <div>
+                                    <span class="home-promo-code">FREESHIP</span>
+                                    <span class="home-promo-hint">Giảm 30.000&nbsp;₫ ship</span>
+                                </div>
+                                <button type="button" class="btn btn-promo-copy" onclick="copyPromoCode('FREESHIP')">Copy</button>
+                            </li>
+                            <li class="home-promo-chip">
+                                <div>
+                                    <span class="home-promo-code">WELCOME10</span>
+                                    <span class="home-promo-hint">Giảm 10%</span>
+                                </div>
+                                <button type="button" class="btn btn-promo-copy" onclick="copyPromoCode('WELCOME10')">Copy</button>
+                            </li>
+                        </ul>
+                        <button type="button" class="btn btn-light home-promo-cta" onclick="MapsToSection('menu')">Đặt hàng &amp; nhập mã</button>
+                    </div>
+                </section>
             </div>
         </section>
 
