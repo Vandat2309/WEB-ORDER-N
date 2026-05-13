@@ -379,7 +379,8 @@ function validateCheckoutForm() {
 
     if (!form.checkValidity()) {
         form.querySelectorAll(':invalid').forEach((el) => {
-            el.closest('.form-group')?.classList.add('has-error');
+            const g = el.closest('.form-group');
+            if (g) g.classList.add('has-error');
         });
         const firstInvalid = form.querySelector(':invalid');
         if (firstInvalid) firstInvalid.focus();
@@ -1255,7 +1256,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const el = e.target;
             if (!(el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement)) return;
             el.setCustomValidity('');
-            el.closest('.form-group')?.classList.remove('has-error');
+            const g = el.closest('.form-group');
+            if (g) g.classList.remove('has-error');
         });
     }
 

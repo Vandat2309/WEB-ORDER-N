@@ -432,7 +432,10 @@ input:focus, textarea:focus, select:focus {
 
 .hero-decor {
     position: absolute;
-    inset: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     pointer-events: none;
     z-index: 0;
 }
@@ -501,15 +504,21 @@ input:focus, textarea:focus, select:focus {
     margin: 0 auto;
 }
 
+/* Flex thay grid: tương thích GitHub Pages / trình duyệt cũ hơn (tránh 1 cột lỗi) */
 .hero-landing-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-    gap: clamp(1.5rem, 4vw, 3rem);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
+    justify-content: space-between;
+    gap: clamp(1.5rem, 4vw, 3rem);
 }
 
 .hero-landing-copy {
     text-align: left;
+    flex: 1 1 320px;
+    min-width: min(100%, 280px);
+    max-width: 560px;
 }
 
 .hero-eyebrow {
@@ -558,6 +567,8 @@ input:focus, textarea:focus, select:focus {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex: 1 1 280px;
+    min-width: min(100%, 260px);
     min-height: min(52vw, 340px);
 }
 
@@ -1923,7 +1934,8 @@ input:focus, textarea:focus, select:focus {
     }
 
     .hero-landing-grid {
-        grid-template-columns: 1fr;
+        flex-direction: column;
+        justify-content: flex-start;
         text-align: center;
     }
 

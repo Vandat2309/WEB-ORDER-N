@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FastFood Order - Quản Lý Đặt Hàng Đồ Ăn</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=ghpages-1">
 </head>
 <body>
     <header class="header">
@@ -109,7 +109,7 @@
                                 <p class="hero-lede">Burger nướng than, pizza phô mai chảy và món Việt đậm vị — đặt online, theo dõi đơn trực tiếp, ưu đãi mỗi ngày.</p>
                                 <div class="hero-cta-row">
                                     <button type="button" class="btn btn-primary" onclick="navigateToSection('menu')">Khám phá menu</button>
-                                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('home-promo')?.scrollIntoView({ behavior: 'smooth', block: 'center' })">Săn mã giảm giá</button>
+                                    <button type="button" class="btn btn-secondary" onclick="(function(){var e=document.getElementById('home-promo');if(e)e.scrollIntoView({behavior:'smooth',block:'center'});})()">Săn mã giảm giá</button>
                                 </div>
                             </div>
                             <div class="hero-landing-visual">
@@ -591,6 +591,6 @@
     </footer>
 
     <!-- ?v= bắt buộc tải lại JS sau khi đổi MENU/ảnh (tránh cache GitHub Pages) — tăng số khi deploy -->
-    <script src="xuly.js?v=4"></script>
+    <script src="xuly.js?v=5"></script>
 </body>
 </html>
