@@ -46,7 +46,7 @@ const MENU_DATA = [
         price: 55000,
         description: 'Burger với bacon, trứng, phô mai và sốt đặc biệt',
         emoji: '🥓',
-        image: 'image/Bacon Burger.jpg',
+        image: 'image/Bacon-Burger.jpg',
         rating: 4.8,
         ratingCount: 180
     },
@@ -57,7 +57,7 @@ const MENU_DATA = [
         price: 48000,
         description: 'Burger cay nồng với ớt, xà lách cay và sốt ớt tươi',
         emoji: '🌶️',
-        image: 'image/Spicy Burger.jpg',
+        image: 'image/Spicy-Burger.jpg',
         rating: 4.3,
         ratingCount: 120
     },
@@ -68,7 +68,7 @@ const MENU_DATA = [
         price: 65000,
         description: 'Pizza cơ bản với cà chua, phô mai mozzarella và rau thơm',
         emoji: '🍕',
-        image: 'image/Margherita Pizza.jpg',
+        image: 'image/Margherita-Pizza.jpg',
         rating: 4.6,
         ratingCount: 220
     },
@@ -79,7 +79,7 @@ const MENU_DATA = [
         price: 75000,
         description: 'Pizza với pepperoni, phô mai và sốt cà chua tươi',
         emoji: '🍕',
-        image: 'image/pepperoni pizza.jpg',
+        image: 'image/pepperoni-pizza.jpg',
         rating: 4.7,
         ratingCount: 250
     },
@@ -90,7 +90,7 @@ const MENU_DATA = [
         price: 95000,
         description: 'Pizza hải sản với tôm, mực, cơm và phô mai',
         emoji: '🦐',
-        image: 'image/Seafood pizza.jpg',
+        image: 'image/Seafood-pizza.jpg',
         rating: 4.8,
         ratingCount: 180
     },
@@ -101,7 +101,7 @@ const MENU_DATA = [
         price: 60000,
         description: 'Pizza chay với rau quả tươi, đậu và phô mai',
         emoji: '🥦',
-        image: 'image/Vegetarian Pizza.jpg',
+        image: 'image/Vegetarian-Pizza.jpg',
         rating: 4.4,
         ratingCount: 100
     },
@@ -112,7 +112,7 @@ const MENU_DATA = [
         price: 15000,
         description: 'Nước ngọt Coca Cola lạnh mát',
         emoji: '🥤',
-        image: 'image/coca cola.jpg',
+        image: 'image/coca-cola.jpg',
         rating: 4.2,
         ratingCount: 500
     },
@@ -134,7 +134,7 @@ const MENU_DATA = [
         price: 25000,
         description: 'Nước ép trái cây tươi 100% tự nhiên',
         emoji: '🧃',
-        image: 'image/Fresh Juice.png',
+        image: 'image/Fresh-Juice.png',
         rating: 4.6,
         ratingCount: 180
     },
@@ -145,7 +145,7 @@ const MENU_DATA = [
         price: 20000,
         description: 'Cà phê đen đá lạnh ngon tuyệt',
         emoji: '☕',
-        image: 'image/Iced Coffee.jpg',
+        image: 'image/Iced-Coffee.jpg',
         rating: 4.5,
         ratingCount: 350
     },
@@ -156,7 +156,7 @@ const MENU_DATA = [
         price: 35000,
         description: 'Bánh chocolate mềm mịn với kem tươi',
         emoji: '🍰',
-        image: 'image/Chocolate Cake.jpg',
+        image: 'image/Chocolate-Cake.jpg',
         rating: 4.7,
         ratingCount: 200
     },
@@ -167,7 +167,7 @@ const MENU_DATA = [
         price: 22000,
         description: 'Kem lạnh với các hương vị khác nhau',
         emoji: '🍦',
-        image: 'image/Ice Cream.jpg',
+        image: 'image/Ice-Cream.jpg',
         rating: 4.6,
         ratingCount: 280
     },
@@ -200,7 +200,7 @@ const MENU_DATA = [
         price: 35000,
         description: 'Phở bò truyền thống với nước dùng vị thơm, thịt bò mềm',
         emoji: '🍜',
-        image: 'image/Pho bo.jpg',
+        image: 'image/Pho-bo.jpg',
         rating: 4.9,
         ratingCount: 450
     },
@@ -211,7 +211,7 @@ const MENU_DATA = [
         price: 38000,
         description: 'Bún chả Hà Nội với thịt nướng, chả cốm, rau sạch',
         emoji: '🍲',
-        image: 'image/Bun cha.jpg',
+        image: 'image/Bun-cha.jpg',
         rating: 4.8,
         ratingCount: 380
     },
@@ -222,7 +222,7 @@ const MENU_DATA = [
         price: 42000,
         description: 'Mỳ Quảng đặc trưng với tỏi, nước dừa, thịt gà và tôm',
         emoji: '🍝',
-        image: 'image/My quang.jpeg',
+        image: 'image/My-quang.jpeg',
         rating: 4.7,
         ratingCount: 320
     },
@@ -233,7 +233,7 @@ const MENU_DATA = [
         price: 48000,
         description: 'Gà rán giòn với công thức truyền thống, ăn kèm nước mắm chua',
         emoji: '🍗',
-        image: 'image/Ga ran.jpg',
+        image: 'image/Ga-ran.jpg',
         rating: 4.8,
         ratingCount: 410
     },
@@ -244,7 +244,7 @@ const MENU_DATA = [
         price: 36000,
         description: 'Cơm tấm Sài Gòn với sườn nướng, chả trứng, trứng ốp la',
         emoji: '🍚',
-        image: 'image/com tam.jpg',
+        image: 'image/com-tam.jpg',
         rating: 4.7,
         ratingCount: 340
     },
@@ -255,7 +255,7 @@ const MENU_DATA = [
         price: 32000,
         description: 'Bánh mì giòn với thịt nướng, pâté, rau sạch tươi ngon',
         emoji: '🥖',
-        image: 'image/banh mi.jpg',
+        image: 'image/banh-mi.jpg',
         rating: 4.6,
         ratingCount: 360
     },
@@ -266,7 +266,7 @@ const MENU_DATA = [
         price: 34000,
         description: 'Hủ tiếu Nam Vang với tôm, cua, giò heo và rau',
         emoji: '🍤',
-        image: 'image/hu tieu.jpg',
+        image: 'image/hu-tieu.jpg',
         rating: 4.7,
         ratingCount: 300
     },
@@ -277,7 +277,7 @@ const MENU_DATA = [
         price: 39000,
         description: 'Bún riêu cua nóng hổi với tôm, cua, trứng cua',
         emoji: '🦀',
-        image: 'image/bun rieu cua.jpg',
+        image: 'image/bun-rieu-cua.jpg',
         rating: 4.8,
         ratingCount: 370
     },
@@ -288,7 +288,7 @@ const MENU_DATA = [
         price: 45000,
         description: 'Chả cá tươi với cà chua, nước dùng thơm, bún tươi',
         emoji: '🐟',
-        image: 'image/cha ca la vong.jpg',
+        image: 'image/cha-ca-la-vong.jpg',
         rating: 4.9,
         ratingCount: 290
     },
@@ -299,7 +299,7 @@ const MENU_DATA = [
         price: 28000,
         description: 'Canh cà chua chua ngọt với cá, tôm, thơm lừng',
         emoji: '🍅',
-        image: 'image/canh ca chua.jpg',
+        image: 'image/canh-ca-chua.jpg',
         rating: 4.6,
         ratingCount: 250
     },
@@ -569,57 +569,20 @@ function formatCurrency(amount) {
 }
 
 function showNotification(message, type = 'success', duration = 3000) {
-    // Tạo notification container nếu chưa tồn tại
-    let notificationContainer = document.getElementById('notificationContainer');
-    if (!notificationContainer) {
-        notificationContainer = document.createElement('div');
-        notificationContainer.id = 'notificationContainer';
-        notificationContainer.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 2000;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            pointer-events: none;
-        `;
-        document.body.appendChild(notificationContainer);
-    }
-
-    // Tạo notification element
-    const notification = document.createElement('div');
-    notification.className = `notification ${type} active`;
-    notification.textContent = message;
-    notification.style.cssText = `
-        background: white;
-        padding: 1rem 1.5rem;
-        border-radius: 0.5rem;
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        animation: slideIn 0.3s ease;
-        max-width: 400px;
-        pointer-events: auto;
-        cursor: pointer;
-    `;
-
-    // Thêm CSS class động
-    notification.className = `notification ${type}`;
+    const notificationEl = document.getElementById('notification');
+    if (!notificationEl) return;
     
-    // Thêm vào container
-    notificationContainer.appendChild(notification);
-
-    // Auto remove sau duration
+    notificationEl.textContent = message;
+    notificationEl.className = `notification ${type} active`;
+    
     const timeout = setTimeout(() => {
-        notification.style.animation = 'slideOut 0.3s ease';
-        setTimeout(() => notification.remove(), 300);
+        notificationEl.classList.remove('active');
     }, duration);
-
-    // Click để đóng
-    notification.addEventListener('click', () => {
+    
+    notificationEl.addEventListener('click', () => {
         clearTimeout(timeout);
-        notification.style.animation = 'slideOut 0.3s ease';
-        setTimeout(() => notification.remove(), 300);
-    });
+        notificationEl.classList.remove('active');
+    }, { once: true });
 }
 
 function showMessagePromo(message, type = 'success') {
