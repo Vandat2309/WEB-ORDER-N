@@ -504,7 +504,6 @@ input:focus, textarea:focus, select:focus {
     margin: 0 auto;
 }
 
-/* Flex thay grid: tương thích GitHub Pages / trình duyệt cũ hơn (tránh 1 cột lỗi) */
 .hero-landing-grid {
     display: flex;
     flex-direction: row;
