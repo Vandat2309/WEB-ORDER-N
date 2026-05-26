@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FastFood Order - Quản Lý Đặt Hàng Đồ Ăn</title>
+    <link rel="stylesheet" href="style.css?v=2">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <span class="logo-icon">🍔</span>
+                <h1>FastFood Order</h1>
+            </div>
+            <nav class="nav-main">
+                <ul>
+                    <li><a href="#home" class="nav-link active" data-section="home">Trang Chủ</a></li>
+                    <li><a href="#menu" class="nav-link" data-section="menu">Menu</a></li>
+                    <li><a href="#orders" class="nav-link" data-section="orders">Đơn Hàng</a></li>
+                    <li><a href="#contact" class="nav-link" data-section="contact">Liên Hệ</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <button class="theme-toggle" id="themeToggle" type="button" aria-label="Chuyển chế độ sáng/tối">
+                    <span class="theme-toggle-icon">🌙</span>
+                </button>
+                <button class="nav-toggle" id="navToggle" aria-label="Mở menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <div class="user-header">
+                <button class="account-btn" id="accountBtn">
+                    <span class="account-icon">👤</span>
+                    <span class="account-name" id="accountName">Đăng nhập</span>
+                </button>
+            </div>
+            <div class="cart-header">
+                <button class="cart-icon-btn" id="cartBtn">
+                    <span class="cart-icon">🛒</span>
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+    <div id="mobileOverlay" class="mobile-overlay" aria-hidden="true"></div>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="authTitle">Đăng Nhập</h3>
+                <button class="modal-close" data-modal="authModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="auth-container">
+                    <div class="social-login">
+                        <button class="btn btn-primary" id="googleLogin">Đăng nhập với Google</button>
+                        <button class="btn btn-primary" id="facebookLogin">Đăng nhập với Facebook</button>
+                    </div>
+
+                    <div class="divider">Hoặc</div>
+
+                    <form id="loginForm" class="auth-form">
+                        <div class="form-group">
+                            <label for="loginEmail">Email</label>
+                            <input type="email" id="loginEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPassword">Mật khẩu</label>
+                            <input type="password" id="loginPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Đăng Nhập</button>
+                    </form>
+
+                    <form id="registerForm" class="auth-form" style="display:none;">
+                        <div class="form-group">
+                            <label for="regName">Họ Tên</label>
+                            <input type="text" id="regName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="regEmail">Email</label>
+                            <input type="email" id="regEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="regPassword">Mật khẩu</label>
+                            <input type="password" id="regPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Đăng Ký</button>
+                    </form>
+
+                    <div class="auth-switch">
+                        <span id="toRegister">Chưa có tài khoản? <a href="#">Đăng ký</a></span>
+                        <span id="toLogin" style="display:none;">Đã có tài khoản? <a href="#">Đăng nhập</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="main-content">
+        <section id="home" class="section active">
+            <div class="home-landing">
+                <div class="hero-shell">
+                    <div class="hero-decor" aria-hidden="true">
+                        <span class="hero-blob hero-blob--1"></span>
+                        <span class="hero-blob hero-blob--2"></span>
+                        <span class="hero-blob hero-blob--3"></span>
+                        <span class="hero-float-icon hero-float-icon--herb">🌿</span>
+                        <span class="hero-float-icon hero-float-icon--tomato">🍅</span>
+                        <span class="hero-float-icon hero-float-icon--chili">🌶️</span>
+                    </div>
+                    <div class="hero-landing-inner">
+                        <div class="hero-landing-grid">
+                            <div class="hero-landing-copy">
+                                <p class="hero-eyebrow">Giao nóng · Đặt trong 1 phút</p>
+                                <h2 class="hero-title">Đồ ăn ngon gõ cửa <span class="hero-title-accent">siêu tốc</span></h2>
+                                <p class="hero-lede">Burger nướng than, pizza phô mai chảy và món Việt đậm vị — đặt online, theo dõi đơn trực tiếp, ưu đãi mỗi ngày.</p>
+                                <div class="hero-cta-row">
+                                    <button type="button" class="btn btn-primary" onclick="navigateToSection('menu')">Khám phá menu</button>
+                                    <button type="button" class="btn btn-secondary" onclick="(function(){var e=document.getElementById('home-promo');if(e)e.scrollIntoView({behavior:'smooth',block:'center'});})()">Săn mã giảm giá</button>
+                                </div>
+                            </div>
+                            <div class="hero-landing-visual">
+                                <div class="hero-image-ring" aria-hidden="true"></div>
+                                <div class="hero-image-frame">
+                                    <img
+                                        class="hero-float-img"
+                                        src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&amp;fit=crop&amp;w=960&amp;q=85"
+                                        alt="Burger phô mai thịt bò nóng hổi"
+                                        width="960"
+                                        height="960"
+                                        loading="eager"
+                                        decoding="async"
+                                        fetchpriority="high"
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hero-stats-bar" role="group" aria-label="Thống kê nhanh">
+                            <div class="hero-stat-card">
+                                <span class="hero-stat-ico" aria-hidden="true">🍱</span>
+                                <div class="hero-stat-num">150+</div>
+                                <div class="hero-stat-label">Món ăn</div>
+                            </div>
+                            <div class="hero-stat-card">
+                                <span class="hero-stat-ico" aria-hidden="true">👥</span>
+                                <div class="hero-stat-num">500+</div>
+                                <div class="hero-stat-label">Khách hàng</div>
+                            </div>
+                            <div class="hero-stat-card">
+                                <span class="hero-stat-ico" aria-hidden="true">⚡</span>
+                                <div class="hero-stat-num">24/7</div>
+                                <div class="hero-stat-label">Phục vụ</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <section class="home-block home-how" aria-labelledby="home-how-title">
+                    <h2 id="home-how-title" class="home-block-title">Quy trình đặt hàng</h2>
+                    <p class="home-block-lede">Ba bước đơn giản — món nóng tới tay bạn</p>
+                    <div class="home-steps-row">
+                        <article class="home-step-card">
+                            <div class="home-step-icon" aria-hidden="true">🍔</div>
+                            <h3 class="home-step-title">1. Chọn món</h3>
+                            <p class="home-step-text">Lướt menu, xem ảnh thật và chọn size, sốt yêu thích.</p>
+                        </article>
+                        <span class="home-step-arrow" aria-hidden="true">➔</span>
+                        <article class="home-step-card">
+                            <div class="home-step-icon" aria-hidden="true">💳</div>
+                            <h3 class="home-step-title">2. Đặt hàng &amp; thanh toán</h3>
+                            <p class="home-step-text">Xác nhận giỏ, nhập mã khuyến mãi và hoàn tất đơn trong vài giây.</p>
+                        </article>
+                        <span class="home-step-arrow" aria-hidden="true">➔</span>
+                        <article class="home-step-card">
+                            <div class="home-step-icon" aria-hidden="true">🛵</div>
+                            <h3 class="home-step-title">3. Giao hàng siêu tốc</h3>
+                            <p class="home-step-text">Shipper đưa tận nơi — bạn chỉ việc mở hộp và thưởng thức.</p>
+                        </article>
+                    </div>
+                </section>
+
+                <section class="home-block home-trending" aria-labelledby="home-trending-title">
+                    <h2 id="home-trending-title" class="home-block-title">Món ăn nổi bật</h2>
+                    <p class="home-block-lede">Best seller được khách order nhiều nhất tuần này</p>
+                    <div class="home-trending-grid">
+                        <article class="home-feature-card">
+                            <div class="home-feature-image">
+                                <img class="menu-item-photo" src="image/Pho-bo.jpg" alt="Phở Bò" loading="lazy" decoding="async" onerror="this.classList.add('food-photo--error')">
+                                <span class="food-thumb-emoji" aria-hidden="true">🍜</span>
+                                <span class="home-feature-badge">Top 1</span>
+                            </div>
+                            <div class="home-feature-body">
+                                <h3 class="home-feature-name">Phở Bò</h3>
+                                <p class="home-feature-desc">Nước dùng thơm, thịt mềm — chuẩn vị truyền thống.</p>
+                                <div class="home-feature-meta">
+                                    <span class="home-feature-price">35.000&nbsp;₫</span>
+                                    <span class="home-feature-rating">⭐ 4,9</span>
+                                </div>
+                                <button type="button" class="menu-item-btn" onclick="showProductDetail(17)">Chi tiết</button>
+                            </div>
+                        </article>
+                        <article class="home-feature-card">
+                            <div class="home-feature-image">
+                                <img class="menu-item-photo" src="image/Bacon-Burger.jpg" alt="Bacon Burger" loading="lazy" decoding="async" onerror="this.classList.add('food-photo--error')">
+                                <span class="food-thumb-emoji" aria-hidden="true">🥓</span>
+                                <span class="home-feature-badge">Bán chạy</span>
+                            </div>
+                            <div class="home-feature-body">
+                                <h3 class="home-feature-name">Bacon Burger</h3>
+                                <p class="home-feature-desc">Bacon giòn, trứng ốp la và sốt đặc biệt.</p>
+                                <div class="home-feature-meta">
+                                    <span class="home-feature-price">55.000&nbsp;₫</span>
+                                    <span class="home-feature-rating">⭐ 4,8</span>
+                                </div>
+                                <button type="button" class="menu-item-btn" onclick="showProductDetail(3)">Chi tiết</button>
+                            </div>
+                        </article>
+                        <article class="home-feature-card">
+                            <div class="home-feature-image">
+                                <img class="menu-item-photo" src="image/Seafood-pizza.jpg" alt="Seafood Pizza" loading="lazy" decoding="async" onerror="this.classList.add('food-photo--error')">
+                                <span class="food-thumb-emoji" aria-hidden="true">🦐</span>
+                                <span class="home-feature-badge">Fan pizza</span>
+                            </div>
+                            <div class="home-feature-body">
+                                <h3 class="home-feature-name">Seafood Pizza</h3>
+                                <p class="home-feature-desc">Tôm mực tươi, phô mai kéo sợi hấp dẫn.</p>
+                                <div class="home-feature-meta">
+                                    <span class="home-feature-price">95.000&nbsp;₫</span>
+                                    <span class="home-feature-rating">⭐ 4,8</span>
+                                </div>
+                                <button type="button" class="menu-item-btn" onclick="showProductDetail(7)">Chi tiết</button>
+                            </div>
+                        </article>
+                        <article class="home-feature-card">
+                            <div class="home-feature-image">
+                                <img class="menu-item-photo" src="image/pepperoni-pizza.jpg" alt="Pepperoni Pizza" loading="lazy" decoding="async" onerror="this.classList.add('food-photo--error')">
+                                <span class="food-thumb-emoji" aria-hidden="true">🍕</span>
+                                <span class="home-feature-badge">Must try</span>
+                            </div>
+                            <div class="home-feature-body">
+                                <h3 class="home-feature-name">Pepperoni Pizza</h3>
+                                <p class="home-feature-desc">Pepperoni cay nhẹ, lớp phô mai vàng óng.</p>
+                                <div class="home-feature-meta">
+                                    <span class="home-feature-price">75.000&nbsp;₫</span>
+                                    <span class="home-feature-rating">⭐ 4,7</span>
+                                </div>
+                                <button type="button" class="menu-item-btn" onclick="showProductDetail(6)">Chi tiết</button>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="home-trending-cta">
+                        <button type="button" class="btn btn-primary btn-wide" onclick="MapsToSection('menu')">Xem toàn bộ menu</button>
+                    </div>
+                </section>
+
+                <section id="home-promo" class="home-promo-banner" aria-labelledby="home-promo-title">
+                    <div class="home-promo-banner__bg" aria-hidden="true"></div>
+                    <div class="home-promo-banner__inner">
+                        <div class="home-promo-copy">
+                            <h2 id="home-promo-title" class="home-promo-title">Mã khuyến mãi ngập tràn</h2>
+                            <p class="home-promo-text">Dùng ngay khi thanh toán — tiết kiệm tới vài chục nghìn mỗi đơn.</p>
+                        </div>
+                        <ul class="home-promo-list">
+                            <li class="home-promo-chip">
+                                <div>
+                                    <span class="home-promo-code">SUMMER50</span>
+                                    <span class="home-promo-hint">Giảm 50.000&nbsp;₫</span>
+                                </div>
+                                <button type="button" class="btn btn-promo-copy" onclick="copyPromoCode('SUMMER50')">Copy</button>
+                            </li>
+                            <li class="home-promo-chip">
+                                <div>
+                                    <span class="home-promo-code">NEWYEAR20</span>
+                                    <span class="home-promo-hint">Giảm 20%</span>
+                                </div>
+                                <button type="button" class="btn btn-promo-copy" onclick="copyPromoCode('NEWYEAR20')">Copy</button>
+                            </li>
+                            <li class="home-promo-chip">
+                                <div>
+                                    <span class="home-promo-code">FREESHIP</span>
+                                    <span class="home-promo-hint">Giảm 30.000&nbsp;₫ ship</span>
+                                </div>
+                                <button type="button" class="btn btn-promo-copy" onclick="copyPromoCode('FREESHIP')">Copy</button>
+                            </li>
+                            <li class="home-promo-chip">
+                                <div>
+                                    <span class="home-promo-code">WELCOME10</span>
+                                    <span class="home-promo-hint">Giảm 10%</span>
+                                </div>
+                                <button type="button" class="btn btn-promo-copy" onclick="copyPromoCode('WELCOME10')">Copy</button>
+                            </li>
+                        </ul>
+                        <button type="button" class="btn btn-light home-promo-cta" onclick="MapsToSection('menu')">Đặt hàng &amp; nhập mã</button>
+                    </div>
+                </section>
+            </div>
+        </section>
+
+        <section id="menu" class="section">
+            <div class="section-header">
+                <h2>Menu Thức Ăn</h2>
+                <p>Chọn những món ăn ngon nhất của chúng tôi</p>
+            </div>
+
+            <div class="menu-search">
+                <input type="text" id="searchInput" placeholder="🔍 Tìm kiếm món ăn...">
+            </div>
+
+            <div class="menu-filters">
+                <button class="filter-btn active" data-category="all">Tất Cả</button>
+                <button class="filter-btn" data-category="burger">Burger</button>
+                <button class="filter-btn" data-category="pizza">Pizza</button>
+                <button class="filter-btn" data-category="drink">Đồ Uống</button>
+                <button class="filter-btn" data-category="dessert">Tráng Miệng</button>
+            </div>
+
+            <div class="menu-container" id="menuContainer">
+
+            </div>
+        </section>
+
+        <section id="orders" class="section">
+            <div class="section-header">
+                <h2>Quản Lý Đơn Hàng</h2>
+                <p>Xem và quản lý các đơn hàng của bạn</p>
+            </div>
+
+            <div class="orders-container">
+                <div class="orders-list" id="ordersList">
+
+                </div>
+                <div id="emptyOrders" class="empty-state empty-state-with-btn">
+                    <div class="empty-state-visual" aria-hidden="true"></div>
+                    <div class="empty-icon">📋</div>
+                    <p>Chưa có đơn hàng nào</p>
+                    <button class="btn btn-primary" onclick="navigateToSection('menu')">Quay Lại Menu</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <div class="section-header">
+                <h2>Liên Hệ Với Chúng Tôi</h2>
+                <p>Hãy để lại thông tin của bạn, chúng tôi sẽ liên hệ ngay</p>
+            </div>
+
+            <div class="contact-container">
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <label for="contactName">Họ Tên</label>
+                        <input type="text" id="contactName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactPhone">Số Điện Thoại</label>
+                        <input type="tel" id="contactPhone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactEmail">Email</label>
+                        <input type="email" id="contactEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactMessage">Tin Nhắn</label>
+                        <textarea id="contactMessage" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Gửi Tin Nhắn</button>
+                </form>
+
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <h4>Địa Chỉ</h4>
+                            <p>27 Lâm Nhỉ, Phường An Khê, Tp Đà Nẵng</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div>
+                            <h4>Điện Thoại</h4>
+                            <p>0917034119</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">⏰</div>
+                        <div>
+                            <h4>Giờ Mở Cửa</h4>
+                            <p>10:00 - 23:00 (Hàng Ngày)</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">✉️</div>
+                        <div>
+                            <h4>Email</h4>
+                            <p>vandattran2k7@gmail.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="cartModal" class="modal">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h3>🛒 Giỏ Hàng</h3>
+                <button class="modal-close" data-modal="cartModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="cart-items" id="cartItems">
+                </div>
+                <div id="emptyCart" class="empty-state">
+                    <div class="empty-state-visual" aria-hidden="true"></div>
+                    <div class="empty-icon">🛒</div>
+                    <p>Giỏ hàng của bạn trống</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="cart-summary">
+                    <div class="summary-item">
+                        <span>Tổng tiền:</span>
+                        <span class="summary-value" id="totalPrice">0 VNĐ</span>
+                    </div>
+                </div>
+                <button class="btn btn-secondary" data-modal="cartModal">Tiếp Tục Mua</button>
+                <button class="btn btn-primary" id="checkoutBtn">Thanh Toán</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="productName">Chi Tiết Sản Phẩm</h3>
+                <button class="modal-close" data-modal="productModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="product-detail">
+                    <div class="product-image">
+                        <img id="productImage" src="" alt="">
+                    </div>
+                    <div class="product-info">
+                        <p class="product-description" id="productDescription"></p>
+                        <div class="product-rating">
+                            <span id="productRating">⭐⭐⭐⭐⭐</span>
+                            <span class="rating-count" id="productRatingCount">(150)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="price" id="productPrice">0 VNĐ</span>
+                        </div>
+                        <div class="quantity-selector">
+                            <button class="qty-btn" id="decreaseQty">−</button>
+                            <input type="number" id="quantity" value="1" min="1" readonly>
+                            <button class="qty-btn" id="increaseQty">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-modal="productModal">Hủy</button>
+                <button class="btn btn-primary" id="addToCartBtn">Thêm Vào Giỏ</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="checkoutModal" class="modal">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h3>Thanh Toán Đơn Hàng</h3>
+                <button class="modal-close" data-modal="checkoutModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="checkoutForm" class="checkout-form">
+                    <div class="form-section">
+                        <h4>Thông Tin Giao Hàng</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="customerName">Họ Tên *</label>
+                                <input type="text" id="customerName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="customerPhone">Số Điện Thoại *</label>
+                                <input type="tel" id="customerPhone" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="customerEmail">Email *</label>
+                            <input type="email" id="customerEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="customerAddress">Địa Chỉ Giao Hàng *</label>
+                            <textarea id="customerAddress" rows="3" required></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h4>Phương Thức Thanh Toán</h4>
+                        <div class="payment-methods">
+                            <label class="radio-option">
+                                <input type="radio" name="paymentMethod" value="cash" checked>
+                                <span>Tiền Mặt</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="paymentMethod" value="card">
+                                <span>Thẻ Tín Dụng</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="paymentMethod" value="ewallet">
+                                <span>Ví Điện Tử</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h4>Ghi Chú Đơn Hàng</h4>
+                        <textarea id="orderNote" rows="3" placeholder="Ghi chú thêm..."></textarea>
+                    </div>
+
+                    <div class="form-section">
+                        <h4>Mã Giảm Giá</h4>
+                        <div class="promo-input-group">
+                            <input type="text" id="promoCode" placeholder="Nhập mã giảm giá (VD: SUMMER50, NEWYEAR20)">
+                            <button type="button" class="btn btn-secondary" id="applyPromoBtn">Áp Dụng</button>
+                            <button type="button" class="btn btn-secondary" id="removePromoBtn" style="display:none;">Xóa Mã</button>
+                        </div>
+                        <div id="promoMessage"></div>
+                    </div>
+
+                    <div class="order-summary">
+                        <h4>Tóm Tắt Đơn Hàng</h4>
+                        <div id="checkoutItems"></div>
+                        <div class="summary-divider"></div>
+                        <div class="summary-row">
+                            <span>Tổng Tiền:</span>
+                            <span id="checkoutSubtotal">0 VNĐ</span>
+                        </div>
+                        <div class="summary-row" id="discountRow" style="display:none; color: var(--success-color);">
+                            <span id="discountLabel">Giảm Giá:</span>
+                            <span id="checkoutDiscount">0 VNĐ</span>
+                        </div>
+                        <div class="summary-total">
+                            <span>Tổng Cộng:</span>
+                            <span id="checkoutTotal">0 VNĐ</span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-modal="checkoutModal">Hủy</button>
+                <button class="btn btn-primary" id="submitOrderBtn">Xác Nhận Đơn Hàng</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="orderDetailModal" class="modal">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h3>Chi Tiết Đơn Hàng</h3>
+                <button class="modal-close" data-modal="orderDetailModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="orderDetailContent">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-modal="orderDetailModal">Đóng</button>
+                <button class="btn btn-danger" id="cancelOrderBtn">Hủy Đơn Hàng</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="notification" class="notification"></div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>FastFood Order</h4>
+                <p>Hệ thống quản lý đặt hàng thức ăn nhanh chuyên nghiệp, đáng tin cậy và tiện lợi.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Liên Kết Nhanh</h4>
+                <ul>
+                    <li><a href="#home">Trang Chủ</a></li>
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#orders">Đơn Hàng</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Theo Dõi Chúng Tôi</h4>
+                <div class="social-links">
+                    <a href="#" class="social-link">Facebook</a>
+                    <a href="#" class="social-link">Instagram</a>
+                    <a href="#" class="social-link">Twitter</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 FastFood Order. Tất cả quyền được bảo lưu.</p>
+        </div>
+    </footer>
+
+    <script src="xuly.js?v=6"></script>
+</body>
+</html>
